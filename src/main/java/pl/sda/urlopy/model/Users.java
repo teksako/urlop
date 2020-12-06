@@ -14,6 +14,7 @@ public class Users {
 
     @Column
     private String firstname;
+
     @Column
     private String lastname;
 
@@ -25,5 +26,9 @@ public class Users {
 
     @Column
     private Long department_id;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private AccountStatus status;
 
 }
