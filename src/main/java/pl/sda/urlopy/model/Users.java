@@ -25,7 +25,7 @@ public class Users {
     private String password;
 
     @Column
-    private Long department_id;
+    private Long departmentId;
 
     @Column
     @Enumerated(EnumType.STRING)
