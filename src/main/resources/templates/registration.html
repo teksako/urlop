@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Urlopy</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css\main.css" type="text/css" />
+</head>
+
+<body>
+<div id="formContent">
+    <div class="registrationTitle" >Rejestracja</div>
+    <form th:action="@{/registration}" th:object="${User}" method="post">>
+    <div>
+        <label th:text="#{label.user.firstName}">first</label>
+        <input th:field="*{firstName}"/>
+        <p th:each="error: ${#fields.errors('firstName')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label th:text="#{label.user.lastName}">last</label>
+        <input th:field="*{lastName}"/>
+        <p th:each="error : ${#fields.errors('lastName')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label th:text="#{label.user.username}">username</label>
+        <input type="email" th:field="*{username}"/>
+        <p th:each="error : ${#fields.errors('username')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label th:text="#{label.user.password}">password</label>
+        <input type="password" th:field="*{password}"/>
+        <p th:each="error : ${#fields.errors('password')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label th:text="#{label.user.confirmPass}">confirm</label>
+        <input type="password" th:field="*{matchingPassword}"/>
+    </div>
+    <button type="submit" th:text="#{label.form.submit}">submit</button>
+</form>
+
+<a th:href="@{/login.html}" th:text="#{label.form.loginLink}">login</a>
+</body>
+</html>

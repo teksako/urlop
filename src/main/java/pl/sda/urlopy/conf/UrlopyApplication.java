@@ -1,4 +1,4 @@
-package pl.sda.urlopy;
+package pl.sda.urlopy.conf;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,31 +1,28 @@
-package pl.sda.urlopy.dto;
+package pl.sda.urlopy.model;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.sda.urlopy.model.AccountStatus;
+import lombok.Setter;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "USER")
 @Data
 @NoArgsConstructor
-public class UserDto {
-    @NotNull
+public class User {
+    @Id
+    @GeneratedValue
+    @Column(name = "USER_ID")
+    private Long id;
 
-    private String firstname;
-    @NotNull
+    public Long getId() {
+        return id;
+    }
 
-    private String lastname;
-    @NotNull
-
-    private String username;
-    @NotNull
-
-    private String password;
-    @NotNull
-
-    private String matchingPassword;
-//    private Long departmentId;
-//    private Data createData;
-//    private AccountStatus status;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getFirstname() {
         return firstname;
@@ -59,11 +56,20 @@ public class UserDto {
         this.password = password;
     }
 
-    public String getMatchingPassword() {
-        return matchingPassword;
-    }
+    @Column
+    private String firstname;
 
-    public void setMatchingPassword(String matchingPassword) {
-        this.matchingPassword = matchingPassword;
-    }
+    @Column
+    private String lastname;
+
+    @Column
+    private String username;
+
+    @Column
+    private String password;
+
+//    @Column
+//    @Enumerated(EnumType.STRING)
+//    private AccountStatus status;
+
 }
