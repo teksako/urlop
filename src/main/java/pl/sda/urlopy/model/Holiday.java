@@ -12,7 +12,7 @@ public class Holiday {
     private Long id;
 
     @Column
-    private Long user_id;
+    private Long userId;
 
     @Column
     @Temporal(TemporalType.DATE)
