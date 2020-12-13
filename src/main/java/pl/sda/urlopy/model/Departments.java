@@ -10,7 +10,7 @@ public class Departments {
     private Long id;
 
     @Column
-    private Long headOfDepartment_id;
+    private Long headOfDepartmentId;
 
     @Column
     private String name;
