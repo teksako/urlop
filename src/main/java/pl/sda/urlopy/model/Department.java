@@ -2,11 +2,11 @@ package pl.sda.urlopy.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "DEPARTMENTS")
-public class Departments {
+@Table(name = "DEPARTMENT")
+public class Department {
     @Id
     @GeneratedValue
-    @Column(name = "DEPARTMENTS_ID")
+    @Column(name = "DEPARTMENT_ID")
     private Long id;
 
     @Column

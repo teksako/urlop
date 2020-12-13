@@ -13,37 +13,44 @@
 
 <body>
 <div id="formContent">
-    <div class="registrationTitle" >Rejestracja</div>
-    <form th:action="@{/registration}" th:object="${User}" method="post">>
+    <div class="registrationTitle" >Tworzenie konta pracownika</div>
+    <form th:action="@{/registration}" th:object="${User}" method="post">
     <div>
-        <label th:text="#{label.user.firstName}">first</label>
+        <label th:text="#{label.user.firstName}">Imię:</label>
         <input th:field="*{firstName}"/>
         <p th:each="error: ${#fields.errors('firstName')}"
            th:text="${error}">Validation error</p>
     </div>
     <div>
-        <label th:text="#{label.user.lastName}">last</label>
+        <label th:text="#{label.user.lastName}">Nazwisko:</label>
         <input th:field="*{lastName}"/>
         <p th:each="error : ${#fields.errors('lastName')}"
            th:text="${error}">Validation error</p>
     </div>
     <div>
-        <label th:text="#{label.user.username}">username</label>
+        <label th:text="#{label.user.username}">Login:</label>
         <input type="email" th:field="*{username}"/>
         <p th:each="error : ${#fields.errors('username')}"
            th:text="${error}">Validation error</p>
     </div>
     <div>
-        <label th:text="#{label.user.password}">password</label>
+        <label th:text="#{label.user.password}">Hasło:</label>
         <input type="password" th:field="*{password}"/>
         <p th:each="error : ${#fields.errors('password')}"
            th:text="${error}">Validation error</p>
     </div>
     <div>
-        <label th:text="#{label.user.confirmPass}">confirm</label>
+        <label th:text="#{label.user.confirmPass}">Powtórz hasło:</label>
         <input type="password" th:field="*{matchingPassword}"/>
     </div>
-    <button type="submit" th:text="#{label.form.submit}">submit</button>
+        <div>
+            <label for="holiday">Dział:</label>
+            <select name="holiday" id="holiday">
+                <option value="dzial IT">dzial IT</option>
+                <option value="dzial sprzedazy">dzial sprzedazy</option>
+            </select>
+        </div>
+    <button type="submit" th:text="#{label.form.submit}">Utwórz</button>
 </form>
 
 <a th:href="@{/login.html}" th:text="#{label.form.loginLink}">login</a>

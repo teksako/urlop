@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>jQuery UI Datepicker - Default functionality</title>
+    <title>Wnioski urlopowe</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -33,6 +33,13 @@ Zalogowanie użytkownik:<p th:text="${username}"></p>
         <tr>
             <td>Ilość dni:</td>
             <td><input type='text' name='countOfDay' value=''></td>
+        </tr>
+        <tr>
+            <td>Osoba zastępująca: </td>
+            <td><select name="replacement person" id="replacement person">
+                <option value="osoba 1">osoba 1</option>
+                <option value="osoba 2">osoba 2</option>
+            </select></td>
         </tr>
         <tr>
     <td><input name="accept" type="submit" value="Do akceptacji" /></td>
