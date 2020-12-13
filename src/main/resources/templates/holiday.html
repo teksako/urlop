@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,10 +16,30 @@
 
 </head>
 <body>
-<form>
-<p>Date: <input type="text" id="startHoliday" name="startHoliday"></p>
-    <p>Date: <input type="text" id="endHoliday" name="endHoliday"></p>
+<div class="wrapper">
+Zalogowanie użytkownik:<p th:text="${username}"></p>
+<div id="formContent">
+    <div class="registrationTitle">Złóż wniosek</div>
+<form th:action="@{/holiday}" th:object="${User}" method="post">
+    <table>
+        <tr>
+            <td>Dzień rozpoczęcia:</td>
+            <td><input type="text" id="startHoliday" name="startHoliday"><td>
+        </tr>
+        <tr>
+            <td>Dzień zakończenia:</td>
+            <td><input type="text" id="endHoliday" name="endHoliday"><td>
+        </tr>
+        <tr>
+            <td>Ilość dni:</td>
+            <td><input type='text' name='countOfDay' value=''></td>
+        </tr>
+        <tr>
+    <td><input name="accept" type="submit" value="Do akceptacji" /></td>
+        </tr></table>
 </form>
+</div>
+</div>
 
 </body>
 </html>
