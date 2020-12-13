@@ -4,11 +4,11 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "HOLIDAYS")
+@Table(name = "HOLIDAY")
 public class Holiday {
     @Id
     @GeneratedValue
-    @Column(name = "HOLIDAYS_ID")
+    @Column(name = "HOLIDAY_ID")
     private Long id;
 
     @Column
