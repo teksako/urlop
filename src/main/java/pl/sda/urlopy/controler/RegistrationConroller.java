@@ -9,7 +9,7 @@ import pl.sda.urlopy.dto.UserDto;
 @Controller
 public class RegistrationConroller {
     @GetMapping({"/registration"})
-    public String registerPage(WebRequest request, Model model){
+    public String registerPage(Model model){
         UserDto userDto = new UserDto();
         return "registration";
     }
