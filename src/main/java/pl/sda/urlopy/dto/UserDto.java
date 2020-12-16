@@ -4,27 +4,21 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.sda.urlopy.model.AccountStatus;
+import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
 public class UserDto {
-    @NotNull
-
+    private Long id;
     private String firstname;
-    @NotNull
-
     private String lastname;
-    @NotNull
-
+    @Size(min = 5)
     private String username;
-    @NotNull
-
+    @Size(min = 5)
     private String password;
-    @NotNull
-
-    private String matchingPassword;
+    private String confirmedPassword;
+    private Date createData;
+    private AccountStatus status;
 //    private Long departmentId;
-//    private Data createData;
-//    private AccountStatus status;
-
 }

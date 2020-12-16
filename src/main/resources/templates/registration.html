@@ -14,35 +14,25 @@
 <body>
 <div id="formContent">
     <div class="registrationTitle" >Tworzenie konta pracownika</div>
-    <form th:action="@{/registration}" th:object="${User}" method="post">
-    <div>
-        <label th:text="#{label.user.firstName}">Imię:</label>
-        <input th:field="*{firstName}"/>
-        <p th:each="error: ${#fields.errors('firstName')}"
-           th:text="${error}">Validation error</p>
-    </div>
-    <div>
-        <label th:text="#{label.user.lastName}">Nazwisko:</label>
-        <input th:field="*{lastName}"/>
-        <p th:each="error : ${#fields.errors('lastName')}"
-           th:text="${error}">Validation error</p>
-    </div>
-    <div>
-        <label th:text="#{label.user.username}">Login:</label>
-        <input type="email" th:field="*{username}"/>
-        <p th:each="error : ${#fields.errors('username')}"
-           th:text="${error}">Validation error</p>
-    </div>
-    <div>
-        <label th:text="#{label.user.password}">Hasło:</label>
-        <input type="password" th:field="*{password}"/>
-        <p th:each="error : ${#fields.errors('password')}"
-           th:text="${error}">Validation error</p>
-    </div>
-    <div>
-        <label th:text="#{label.user.confirmPass}">Powtórz hasło:</label>
-        <input type="password" th:field="*{matchingPassword}"/>
-    </div>
+    <form th:action="@{/registration}" th:object="${user}" method="post">
+        <p class="error" th:text="${commonError}"></p>
+
+        <input id="firstname" type="text" th:field="*{firstname}" class="myTextButton" placeholder="firstname"/>
+        <div class="error" th:errors="*{firstname}"></div>
+
+        <input id="lastname" type="text" th:field="*{lastname}" class="myTextButton" placeholder="lastname"/>
+        <div class="error" th:errors="*{lastname}"></div>
+
+        <input id="username" type="text" th:field="*{username}" class="myTextButton" placeholder="username"/>
+        <div class="error" th:errors="*{username}"></div>
+
+        <input id="password" type="password" th:field="*{password}" class="myPasswordButton"
+               placeholder="hasło"/>
+
+        <div class="error" th:errors="*{password}"></div>
+        <input id="confirmedPassword" type="password" th:field="*{confirmedPassword}" class="myTextButton third"
+               placeholder="powtórz hasło"/>
+
         <div>
             <label for="holiday">Dział:</label>
             <select name="holiday" id="holiday">
@@ -50,9 +40,11 @@
                 <option value="dzial sprzedazy">dzial sprzedazy</option>
             </select>
         </div>
-    <button type="submit" th:text="#{label.form.submit}">Utwórz</button>
-</form>
 
-<a th:href="@{/login.html}" th:text="#{label.form.loginLink}">login</a>
+        <input type="submit" value="Zapisz" name="saveButton" class="mySubmitButton">
+
+    </form>
+
+</div>
 </body>
 </html>

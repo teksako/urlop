@@ -1,21 +1,31 @@
-<html>
-<head></head>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Zaloguj się</title>
+    <link rel="stylesheet" href="static\main.css" type="text/css" />
+</head>
 <body>
+<div class="wrapper">
 <h1>Login</h1>
+    <p class="alert alert-danger" th:if="${param.error}" th:text="'Podany login lub hasło są nieprawidłowe'"></p>
+    <div id="formContent">
 <form name='f' action="login" method='POST'>
     <table>
         <tr>
-            <td>User:</td>
-            <td><input type='text' name='username' value=''></td>
+            <td>Użytkownik:</td>
+            <td><input type="text" id="username" class="myTextButton first" name="username" placeholder="Podaj użytkownika"></td>
         </tr>
         <tr>
-            <td>Password:</td>
-            <td><input type='password' name='password' /></td>
+            <td>Hasło:</td>
+            <td><input type="password" id="pass" class="myPasswordButton second" name="pass" placeholder="Podaj hasło"></td>
         </tr>
         <tr>
             <td><input name="submit" type="submit" value="submit" /></td>
         </tr>
     </table>
 </form>
+    </div>
+</div>
 </body>
 </html>
