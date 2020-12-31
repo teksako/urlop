@@ -34,17 +34,20 @@ public class User {
     @Temporal(TemporalType.DATE)
     private Date createDate;
 
-   @Column
-    @Enumerated(EnumType.STRING)
-   private AccountStatus status;
+    @Column
+    private String role;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_role",
-            joinColumns = { @JoinColumn(name = "USER_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") }
-    )
-    private List<UserRole> roles;
+//   @Column
+//    @Enumerated(EnumType.STRING)
+//   private AccountStatus status;
+//
+//    @ManyToMany
+//    @JoinTable(
+//            name = "user_role",
+//            joinColumns = { @JoinColumn(name = "USER_ID") },
+//            inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") }
+//    )
+//    private List<UserRole> roles;
 
 
 }

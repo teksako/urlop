@@ -9,42 +9,49 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css\main.css" type="text/css" />
+
+
 </head>
 
 <body>
-<div id="formContent">
-    <div class="registrationTitle" >Tworzenie konta pracownika</div>
-    <form th:action="@{/registration}" th:object="${user}" method="post">
-        <p class="error" th:text="${commonError}"></p>
+<div class="mt-50"></div>
+<div class="wrapper">
 
-        <input id="firstname" type="text" th:field="*{firstname}" class="myTextButton" placeholder="firstname"/>
-        <div class="error" th:errors="*{firstname}"></div>
+    <div id="formContent">
+        <div class="registrationTitle" >Tworzenie konta pracownika</div>
 
-        <input id="lastname" type="text" th:field="*{lastname}" class="myTextButton" placeholder="lastname"/>
-        <div class="error" th:errors="*{lastname}"></div>
+        <form th:action="@{/registration}" th:object="${user}" method="post">
+            <p class="error" th:text="${commonError}"></p>
 
-        <input id="username" type="text" th:field="*{username}" class="myTextButton" placeholder="username"/>
-        <div class="error" th:errors="*{username}"></div>
+            <input id="firstname" type="text" th:field="*{firstname}" class="myTextButton" placeholder="firstname"/>
+            <div class="error" th:errors="*{firstname}"></div>
 
-        <input id="password" type="password" th:field="*{password}" class="myPasswordButton"
-               placeholder="hasło"/>
 
-        <div class="error" th:errors="*{password}"></div>
-        <input id="confirmedPassword" type="password" th:field="*{confirmedPassword}" class="myTextButton third"
-               placeholder="powtórz hasło"/>
+            <input id="lastname" type="text" th:field="*{lastname}" class="myTextButton" placeholder="lastname"/>
+            <div class="error" th:errors="*{lastname}"></div>
 
-        <div>
-            <label for="holiday">Dział:</label>
-            <select name="holiday" id="holiday">
-                <option value="dzial IT">dzial IT</option>
-                <option value="dzial sprzedazy">dzial sprzedazy</option>
+            <input id="username" type="text" th:field="*{username}" class="myTextButton" placeholder="username"/>
+            <div class="error" th:errors="*{username}"></div>
+
+            <input id="password" type="password" th:field="*{password}" class="myPasswordButton" placeholder="hasło"/>
+
+            <div class="error" th:errors="*{password}" ></div>
+            <input id="confirmedPassword" type="password" th:field="*{confirmedPassword}" class="myTextButton third"
+                   placeholder="powtórz hasło"/>
+
+            <select name="replacement person" id="role" th:field="*{role}" placeholder="roles">
+                <option value="ADMIN">ADMIN</option>
+                <option value="USER">USER</option>
             </select>
-        </div>
+            <div class="error" th:errors="*{role}"></div>
 
-        <input type="submit" value="Zapisz" name="saveButton" class="mySubmitButton">
+
+            <input type="button" value="Powrót" name="backButton"
+                   onClick="javascript:window.location.href='/login'" class="myButton shortButton" >
+            <input type="submit" value="Zapisz" name="saveButton" class="mySubmitButton">
 
     </form>
-
+    </div>
 </div>
 </body>
 </html>

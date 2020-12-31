@@ -19,7 +19,7 @@ public class UserAssembler {
         entity.setCreateDate(new Date());
         entity.setUsername(userDto.getUsername());
         entity.setPassword(passwordEncoder.encode(userDto.getPassword()));
-
+        entity.setRole(userDto.getRole());
         return entity;
     }
 }

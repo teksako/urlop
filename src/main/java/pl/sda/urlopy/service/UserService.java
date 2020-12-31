@@ -23,8 +23,8 @@ public class UserService {
 
     public Long save(UserDto userDto) {
         User user = userAssembler.toEntity(userDto);
-        Optional<UserRole> userRole = roleRepository.findByType(RoleType.USER);
-        user.setRoles(Arrays.asList(userRole.get()));
+//        Optional<UserRole> userRole = roleRepository.findByType(RoleType.USER);
+//        user.setRoles(Arrays.asList(userRole.get()));
         User savedUser = userRepository.save(user);
         return savedUser.getId();
     }

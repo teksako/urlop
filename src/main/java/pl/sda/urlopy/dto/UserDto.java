@@ -19,6 +19,7 @@ public class UserDto {
     private String password;
     private String confirmedPassword;
     private Date createData;
-    private AccountStatus status;
+    private String role;
+ //   private AccountStatus status;
 //    private Long departmentId;
 }

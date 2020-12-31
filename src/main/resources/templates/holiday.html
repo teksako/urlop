@@ -20,15 +20,18 @@
 Zalogowanie użytkownik:<p th:text="${username}"></p>
 <div id="formContent">
     <div class="registrationTitle">Złóż wniosek</div>
-<form th:action="@{/holiday}" th:object="${User}" method="post">
+    <form th:action="@{/holiday}" th:object="${holiday}" method="post">
+        <p class="error" th:text="${commonError}"></p>
     <table>
         <tr>
             <td>Dzień rozpoczęcia:</td>
-            <td><input type="text" id="startHoliday" name="startHoliday"><td>
+            <td><input type="text" id="startHoliday" th:field="*{startDate}" class="myTextButton" placeholder="startDate"/>
+                <div class="error" th:errors="*{startDate}"></div><td>
         </tr>
         <tr>
             <td>Dzień zakończenia:</td>
-            <td><input type="text" id="endHoliday" name="endHoliday"><td>
+            <td><input type="text" id="endHoliday" th:field="*{endDate}"class="myTextButton" placeholder="endDate"/>
+                <div class="error" th:errors="*{endDate}"></div><td>
         </tr>
         <tr>
             <td>Ilość dni:</td>

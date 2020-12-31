@@ -41,9 +41,9 @@ public class UrlopyApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception{
 
 		if (userRepository.findAll().size() == 0){
-			UserRole userRole = new UserRole();
-			userRole.setType(RoleType.ADMIN);
-			userRole = roleRepository.save(userRole);
+//			UserRole userRole = new UserRole();
+//			userRole.setType(RoleType.ADMIN);
+//			userRole = roleRepository.save(userRole);
 
 			User admin = new User();
 			admin.setUsername("administrator");
@@ -51,7 +51,8 @@ public class UrlopyApplication implements CommandLineRunner {
 			admin.setCreateDate(new Date());
 			admin.setFirstname("Paweł");
 			admin.setLastname("Kwapisiński");
-			admin.setRoles(Arrays.asList(userRole));
+			//admin.setRoles(Arrays.asList(userRole));
+			admin.setRole("ADMIN");
 			userRepository.save(admin);
 
 

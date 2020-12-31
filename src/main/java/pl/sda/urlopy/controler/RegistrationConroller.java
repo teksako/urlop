@@ -17,9 +17,9 @@ public class RegistrationConroller {
     private final UserService userService;
 
 
-    @GetMapping({"/registration"})
+    @GetMapping("/registration")
     public String registerPage(Model model){
-        UserDto userDto = new UserDto();
+        model.addAttribute("user", new UserDto());
         return "registration";
     }
 
