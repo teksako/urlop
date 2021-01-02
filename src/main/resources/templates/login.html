@@ -10,7 +10,7 @@
 <h1>Login</h1>
     <p class="alert alert-danger" th:if="${param.error}" th:text="'Podany login lub hasło są nieprawidłowe'"></p>
     <div id="formContent">
-<form name='f' action="login" method='POST'>
+<form action="/appLogin" method="post">
     <table>
         <tr>
             <td>Użytkownik:</td>

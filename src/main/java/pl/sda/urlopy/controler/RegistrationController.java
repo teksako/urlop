@@ -12,7 +12,7 @@ import pl.sda.urlopy.service.UserService;
 
 @Controller
 @RequiredArgsConstructor
-public class RegistrationConroller {
+public class RegistrationController {
 
     private final UserService userService;
 

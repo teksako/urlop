@@ -21,13 +21,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
-                .usersByUsernameQuery("SELECT u.username, u.password,1 FROM user u WHERE u.username=?")
-                .authoritiesByUsernameQuery("SELECT u.username, r.name, 1 " +
-                        "FROM user u " +
-                        "INNER JOIN user_role ur ON ur.user_id = u.user_id " +
-                        "INNER JOIN role r ON r.role_id = ur.role_id " +
-                        "WHERE u.username=?")
+                .usersByUsernameQuery("SELECT username,password,1"+" FROM user"+" WHERE username=?")
+                .authoritiesByUsernameQuery("SELECT username,password,role,1"+" FROM user"+" WHERE username=?")
                 .dataSource(dataSource);
+        //auth.userDetailsService(userDetailsService());
+
     }
 
     @Override
@@ -43,9 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/dba/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/login").permitAll()
-                .antMatchers("/index").authenticated()
-                .antMatchers("/registration").hasRole("ADMIN")
-                .antMatchers("/holiday").permitAll()
+                .antMatchers("/department").permitAll()
+                .antMatchers("/registration").hasAuthority("ADMIN")
+                .antMatchers("/holiday").authenticated()
                 .anyRequest().authenticated();
 
         http.formLogin()

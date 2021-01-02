@@ -6,6 +6,11 @@
 </head>
 <body>
 <h2>MAIN PAGE</h2>
+Zalogowanie użytkownik:<p th:text="${username}"></p>
+posiada role<p th:text="${role}"></p>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout" />
+</form>
 </form>
 </body>
 </html>

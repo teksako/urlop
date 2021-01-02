@@ -25,8 +25,8 @@ import java.util.Date;
 @Import(SecurityConfig.class)
 public class UrlopyApplication implements CommandLineRunner {
 
-	@Autowired
-	private RoleRepository roleRepository;
+//	@Autowired
+//	private RoleRepository roleRepository;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -45,9 +45,19 @@ public class UrlopyApplication implements CommandLineRunner {
 //			userRole.setType(RoleType.ADMIN);
 //			userRole = roleRepository.save(userRole);
 
+			User user = new User();
+			user.setUsername("user");
+			user.setPassword(encoder.encode("omg11thc"));
+			user.setCreateDate(new Date());
+			user.setFirstname("Paweł");
+			user.setLastname("Kwapisiński");
+			//admin.setRoles(Arrays.asList(userRole));
+			user.setRole("USER");
+			userRepository.save(user);
+
 			User admin = new User();
-			admin.setUsername("administrator");
-			admin.setPassword(encoder.encode("Qsz1oph2"));
+			admin.setUsername("admin");
+			admin.setPassword(encoder.encode("omg11thc"));
 			admin.setCreateDate(new Date());
 			admin.setFirstname("Paweł");
 			admin.setLastname("Kwapisiński");

@@ -10,8 +10,13 @@ public class Department {
     private Long id;
 
     @Column
+    private String name;
+
+    @Column
     private Long headOfDepartmentId;
 
     @Column
-    private String name;
+    private String location;
+
+
 }
