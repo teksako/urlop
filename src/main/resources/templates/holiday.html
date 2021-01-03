@@ -9,46 +9,80 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-        $( function() {
-            $( "#startHoliday, #endHoliday" ).datepicker();
-        } );
+        $(document).ready(function() {
+            $( "#startHoliday" ).datepicker({
+                altField: "#alternate",
+                altFormat: "DD, d MM, yy",
+                minDate: new Date(),
+                maxDate: "+60D",
+                onSelect: function(selected) {
+                    $("#endHoliday").datepicker("option","minDate", selected);
+                    calcDiff();
+                }
+            });
+
+            $( "#endHoliday" ).datepicker({
+                altField: "#alternate1",
+                altFormat: "DD, d MM, yy",
+                minDate: new Date( (new Date()).getTime() + 86400000 ),
+                maxDate:"+60D",
+                onSelect: function(selected) {
+                    $("#startHoliday").datepicker("option","maxDate", selected);
+                    calcDiff();
+                }
+            });
+
+            function calcDiff() {
+                var date1 = $('#startHoliday').datepicker('getDate');
+                var date2 = $('#endHoliday').datepicker('getDate');
+                var diff = 0;
+                $('#datesbetween').empty();
+                if (date1 && date2) {
+                    diff = Math.floor((date2.getTime() - date1.getTime()) / 86400000);
+                    for(var d = date1.getTime(); d <= date2.getTime(); d = d + 86400000){
+                        $('#datesbetween').append( '<br>' + $.datepicker.formatDate( "d MM, yy", new Date(d) ) );
+                    }
+                }
+                $('#countOfDays').val(diff);
+            }
+        });
     </script>
 
 </head>
 <body>
 <div class="wrapper">
-Zalogowanie użytkownik:<p th:text="${username}"></p>
-<div id="formContent">
-    <div class="registrationTitle">Złóż wniosek</div>
-    <form th:action="@{/holiday}" th:object="${holiday}" method="post">
-        <p class="error" th:text="${commonError}"></p>
-    <table>
-        <tr>
-            <td>Dzień rozpoczęcia:</td>
-            <td><input type="text" id="startHoliday" th:field="*{startDate}" class="myTextButton" placeholder="startDate"/>
-                <div class="error" th:errors="*{startDate}"></div><td>
-        </tr>
-        <tr>
-            <td>Dzień zakończenia:</td>
-            <td><input type="text" id="endHoliday" th:field="*{endDate}"class="myTextButton" placeholder="endDate"/>
-                <div class="error" th:errors="*{endDate}"></div><td>
-        </tr>
-        <tr>
-            <td>Ilość dni:</td>
-            <td><input type='text' name='countOfDay' value=''></td>
-        </tr>
-        <tr>
-            <td>Osoba zastępująca: </td>
-            <td><select name="replacement person" id="replacement person">
-                <option value="osoba 1">osoba 1</option>
-                <option value="osoba 2">osoba 2</option>
-            </select></td>
-        </tr>
-        <tr>
-    <td><input name="accept" type="submit" value="Do akceptacji" /></td>
-        </tr></table>
-</form>
-</div>
+    Zalogowanie użytkownik:<p th:text="${username}"></p>
+    <div id="formContent">
+        <div class="registrationTitle">Złóż wniosek</div>
+        <form th:action="@{/holiday}" th:object="${holiday}" method="post">
+            <p class="error" th:text="${commonError}"></p>
+            <table>
+                <tr>
+                    <td>Dzień rozpoczęcia:</td>
+                    <td><input type="text" id="startHoliday" th:field="*{startDate}" class="myTextButton" placeholder="startDate"/>
+                        <div class="error" th:errors="*{startDate}"></div><td>
+                </tr>
+                <tr>
+                    <td>Dzień zakończenia:</td>
+                    <td><input type="text" id="endHoliday" th:field="*{endDate}"class="myTextButton" placeholder="endDate"/>
+                        <div class="error" th:errors="*{endDate}"></div><td>
+                </tr>
+                <tr>
+                    <td>Ilość dni:</td>
+                    <td><input type='text' id="countOfDays" th:field="*{countOfDays}" class="countOfDays" placeholder="countOfDays"></td>
+                </tr>
+                <tr>
+                    <td>Osoba zastępująca: </td>
+                    <td><select name="replacement person" id="replacement person">
+                        <option value="osoba 1">osoba 1</option>
+                        <option value="osoba 2">osoba 2</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><input name="accept" type="submit" value="Do akceptacji" /></td>
+                </tr></table>
+        </form>
+    </div>
 </div>
 
 </body>

@@ -11,6 +11,7 @@ public class HolidayAssembler {
         Holiday entity = new Holiday();
         entity.setStartDate(holidayDto.getStartDate());
         entity.setEndDate(holidayDto.getEndDate());
+        entity.setCountOfDays(holidayDto.getCountOfDays());
         return entity;
     }
 }

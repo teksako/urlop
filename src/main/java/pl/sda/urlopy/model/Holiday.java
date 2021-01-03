@@ -28,5 +28,8 @@ public class Holiday {
     @Temporal(TemporalType.DATE)
     private Date endDate;
 
+    @Column
+    private Long countOfDays;
+
 
 }

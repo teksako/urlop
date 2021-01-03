@@ -30,7 +30,7 @@ public class RegistrationController {
         }
 
         userService.save(user);
-        return "login";
+        return "index";
     }
 
 }

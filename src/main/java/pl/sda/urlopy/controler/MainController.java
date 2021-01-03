@@ -12,6 +12,7 @@ public class MainController {
     public String mainPage(Model model) {
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("username", principal.getUsername());
+        model.addAttribute("role", principal.getAuthorities());
         return "index";
     }
 }

@@ -5,9 +5,9 @@
     <title>Main page</title>
 </head>
 <body>
-<h2>MAIN PAGE</h2>
-Zalogowanie użytkownik:<p th:text="${username}"></p>
-posiada role<p th:text="${role}"></p>
+<h2>Witaj w aplikacji urlopowej</h2>
+Zalogowany użytkownik:<p th:text="${username}"></p>
+Posiada uprawnienia:<p th:text="${role}"></p>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Logout" />
 </form>
