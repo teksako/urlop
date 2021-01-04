@@ -12,4 +12,5 @@ public class HolidayDto {
     private Date startDate;
     private Date endDate;
     private Long countOfDays;
+    private boolean accepted;
 }

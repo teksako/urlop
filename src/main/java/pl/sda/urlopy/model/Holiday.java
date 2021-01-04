@@ -31,5 +31,8 @@ public class Holiday {
     @Column
     private Long countOfDays;
 
+    @Column
+    private boolean accepted;
+
 
 }
