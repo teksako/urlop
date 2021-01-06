@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-test
+Zalogowanie użytkownik:<p th:text="${username}"></p>
+Posiada uprawnienia<p th:text="${role}"></p>
+
+div class="mt-50"></div>
+<div class="wrapper">
+
+    <div id="formContent">
+        <div class="registrationTitle" >Tworzenie konta pracownika</div>
+
+        <form th:action="@{/adddepartment}" th:object="${department}" method="post">
+            <p class="error" th:text="${commonError}"></p>
+
+            <input id="name" type="text" th:field="*{name}" class="myTextButton" placeholder="tname"/>
+            <div class="error" th:errors="*{name}"></div>
+
+
+            <tr>
+                <td>Osoba zastępująca: </td>
+                <td th:object="${department}">
+                    <select name="replacement" id="replacement">
+                        <!--<select name="replacement person" id="replacement" th:field="*{replacement}" placeholder="replacement">-->
+                        <option value="">Wybierz lokalizacje</option>
+                        <option th:each="user : ${users}"
+                                th:value="${user.id}"
+                                th:text="${user.username}"></option>
+                    </select>
+                </td>
+            </tr>
+
+
+            <input type="button" value="Powrót" name="backButton"
+                   onClick="javascript:window.location.href='/login'" class="myButton shortButton" >
+            <input type="submit" value="Zapisz" name="saveButton" class="mySubmitButton">
+
+        </form>
+    </div>
+</div>
 </body>
 </html>

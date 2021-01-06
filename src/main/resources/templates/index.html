@@ -8,6 +8,9 @@
 <h2>Witaj w aplikacji urlopowej</h2>
 Zalogowany użytkownik:<p th:text="${username}"></p>
 Posiada uprawnienia:<p th:text="${role}"></p>
+<a href="http://localhost:8090/holiday">URLOP</a>
+<a href="http://localhost:8090/acceptholiday">akceptacja</a>
+
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Logout" />
 </form>

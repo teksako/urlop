@@ -12,7 +12,8 @@ public class HolidayAssembler {
         entity.setStartDate(holidayDto.getStartDate());
         entity.setEndDate(holidayDto.getEndDate());
         entity.setCountOfDays(holidayDto.getCountOfDays());
-        entity.setAccepted(false);
+        entity.setAccepted(holidayDto.getAccepted());
+        entity.setReplacement(holidayDto.getReplacement());
         return entity;
     }
 }

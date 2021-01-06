@@ -32,7 +32,10 @@ public class Holiday {
     private Long countOfDays;
 
     @Column
-    private boolean accepted;
+    private String accepted;
+
+    @Column
+    private String replacement;
 
 
 }

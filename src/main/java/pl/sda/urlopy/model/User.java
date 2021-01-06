@@ -2,6 +2,8 @@ package pl.sda.urlopy.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class User {
+public class User  {
     @Id
     @GeneratedValue
     @Column(name = "USER_ID")

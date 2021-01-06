@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Zalogowanie użytkownik:<p th:text="${username}"></p>
+Posiada uprawnienia<p th:text="${role}"></p>
+<div class="mt-50"></div>
+<div class="wrapper">
+
+    <div id="formContent">
+        <div class="registrationTitle" >Tworzenie konta pracownika</div>
+
+        <form th:action="@{/location.html}" th:object="${location}" method="post">
+            <p class="error" th:text="${commonError}"></p>
+
+            <input id="firstname" type="text" th:field="*{name}" class="myTextButton" placeholder="firstname"/>
+            <div class="error" th:errors="*{name}"></div>
+
+            <input type="button" value="Powrót" name="backButton"
+                   onClick="javascript:window.location.href='/login'" class="myButton shortButton" >
+            <input type="submit" value="Zapisz" name="saveButton" class="mySubmitButton">
+
+        </form>
+    </div>
+</div>
+</body>
+</html>

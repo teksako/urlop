@@ -115,18 +115,27 @@
                 </tr>
                 <tr>
                     <td>Osoba zastępująca: </td>
-                    <td><select name="replacement person" id="replacement person">
-                        <option value="osoba 1">osoba 1</option>
-                        <option value="osoba 2">osoba 2</option>
-                    </select></td>
+                    <td th:object="${user}">
+                        <select name="replacement" id="replacement">
+                        <!--<select name="replacement person" id="replacement" th:field="*{replacement}" placeholder="replacement">-->
+                        <option value="">Wybierz zastępstwo</option>
+                        <option th:each="user : ${users}"
+                                th:value="${user.id}"
+                                th:text="${user.username}"></option>
+                    </select>
+                    </td>
                 </tr>
-                <tr>
-                    <td><input name="accept" type="submit" value="Do akceptacji" /></td>
-                </tr></table>
-        </form>
-    </div>
+            <tr>
+                <td><input name="accept" type="submit" value="Do akceptacji" /></td>
+            </tr></table>
+    </form>
 </div>
+</div>
+
+
+
 <form th:action="@{/logout}" method="post">
-    <input type="submit" value="Logout" />
+<input type="submit" value="Logout" />
+</form>
 </body>
 </html>

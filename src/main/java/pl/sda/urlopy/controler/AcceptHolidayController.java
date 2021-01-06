@@ -10,55 +10,33 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.sda.urlopy.dto.HolidayDto;
-import pl.sda.urlopy.model.User;
+import pl.sda.urlopy.model.Holiday;
 import pl.sda.urlopy.service.HolidayService;
-import pl.sda.urlopy.service.UserService;
 
-import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
-import java.util.Arrays;
 import java.util.List;
-
 
 @Controller
 @RequiredArgsConstructor
-public class HolidayController {
-    private final HolidayService holidayService;
-    private final UserService userService;
+public class AcceptHolidayController {
 
-    @GetMapping({"/holiday"})
-    public String holidayPage(Model model){
+    private final HolidayService holidayService;
+
+    @GetMapping({"/acceptholiday"})
+    public String acceptHolidayPage(Model model){
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("username", principal.getUsername());
         model.addAttribute("role", principal.getAuthorities());
-        model.addAttribute("holiday", new HolidayDto());
-//        User u = principal.getUser(principal.getUsername());
-//        request.getSession().setAttribute("userId", u.getId);
-        List<User> users = userService.findAll();
-        model.addAttribute("users", users);
-
-        return "holiday";
+        List<Holiday> holidays = holidayService.findAll();
+        model.addAttribute("holidays", holidays);
+    return "acceptholiday";
     }
-//    @GetMapping({"/holiday"})
-//    public String getUser(Model model){
-//        userService.loadUsers();
-//        List<User> users = Arrays.asList(user);
-//        model.addAttribute("allUsers",users);
-//        for (User allUsers: users) {
-//
-//        }
-//        return "allUsers";
-//
-//    }
 
-
-    @PostMapping("/holiday")
-    public String saveHoliday(@ModelAttribute("holiday") HolidayDto holiday, BindingResult bindingResult) {
+    @PostMapping("/acceptholiday")
+    public String saveAcceptHoliday(@ModelAttribute("holiday") HolidayDto holiday, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "holiday";
         }
         holidayService.save(holiday);
         return "login";
     }
-
 }

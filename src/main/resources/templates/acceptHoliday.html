@@ -1,13 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Złożone wnioski</title>
 </head>
 <body>
-<form>
+<tr>
+    <td>Osoba zastępująca: </td>
+    <!-- <td th:object="${user}">-->
+    <td>
+        <select name="replacement" id="replacement">
+            <!--<select name="replacement person" id="replacement" th:field="*{replacement}" placeholder="replacement">-->
+            <option value="">Wybierz zastępstwo</option>
+            <option th:each="holiday : ${holidays}"
+                    th:value="${holiday.id}"
+                    th:text="${holiday.accepted}"></option>
+        </select>
+    </td>
+</tr>
+<div id="formContent"></div>
+    <div class="registrationTitle">Złóż wniosek</div>
+    <form th:action="@{/acceptHoliday}" th:object="${holiday}" method="post">
+        <p class="error" th:text="${commonError}"></p>
 
 
+        <select name="status" th:errors="*{accepted}" id="status"  placeholder="roles">
+            <option value="true">AKCEPTACJA</option>
+            <option value="false">ODRZUCENIE</option>
+        </select>
+                <div class="error" th:errors="*{accepted}"></div>
+
+        <tr>
+            <td><input name="accept" type="submit" value="Aktceptuj" /></td>
+        </tr>
+</form>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout" />
 </form>
 </body>
 </html>
