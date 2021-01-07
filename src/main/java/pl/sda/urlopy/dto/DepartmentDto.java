@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 public class DepartmentDto {
 
     private Long id;
-    private String name;
+    private String nameOfDepartment;
     private String location;
 
 }

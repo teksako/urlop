@@ -11,12 +11,12 @@ Posiada uprawnienia<p th:text="${role}"></p>
 <div class="wrapper">
 
     <div id="formContent">
-        <div class="registrationTitle" >Tworzenie konta pracownika</div>
+        <div class="registrationTitle" >Dodaj lokacje</div>
 
-        <form th:action="@{/location.html}" th:object="${location}" method="post">
+        <form th:action="@{/location}" th:object="${location}" method="post">
             <p class="error" th:text="${commonError}"></p>
 
-            <input id="firstname" type="text" th:field="*{name}" class="myTextButton" placeholder="firstname"/>
+            <input id="nameOfLocation" type="text" th:field="*{name}" class="myTextButton" placeholder="nameOfLocation"/>
             <div class="error" th:errors="*{name}"></div>
 
             <input type="button" value="Powrót" name="backButton"

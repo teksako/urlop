@@ -15,7 +15,7 @@ public class Department {
     private Long id;
 
     @Column
-    private String name;
+    private String nameOfDepartment;
 
 //    @Column
 //    private Long headOfDepartmentId;

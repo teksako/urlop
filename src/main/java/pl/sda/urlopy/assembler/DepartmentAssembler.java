@@ -10,7 +10,7 @@ import pl.sda.urlopy.model.Holiday;
 public class DepartmentAssembler {
     public Department toEntity(DepartmentDto departmentDto) {
         Department entity = new Department();
-        entity.setName(departmentDto.getName());
+        entity.setNameOfDepartment(departmentDto.getNameOfDepartment());
         entity.setLocation(departmentDto.getLocation());
         return entity;
     }

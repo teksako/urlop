@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.sda.urlopy.dto.HolidayDto;
+import pl.sda.urlopy.model.Location;
 import pl.sda.urlopy.service.LocationService;
 
 @Controller
@@ -22,16 +23,16 @@ public class LocationController {
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("username", principal.getUsername());
         model.addAttribute("role", principal.getAuthorities());
-        model.addAttribute("holiday", new HolidayDto());
+        model.addAttribute("location", new Location());
         return "location";
     }
 
     @PostMapping("/location")
-    public String saveLocation(@ModelAttribute("location") LocationService location, BindingResult bindingResult) {
+    public String saveLocation(@ModelAttribute("location") Location location, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "holiday";
+            return "location";
         }
-        locationService.save();
+        locationService.save(location);
         return "login";
     }
 

@@ -1,5 +1,6 @@
 package pl.sda.urlopy.service;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.sda.urlopy.assembler.DepartmentAssembler;
@@ -10,6 +11,7 @@ import pl.sda.urlopy.repository.DepartmentRepository;
 
 @Service
 @RequiredArgsConstructor
+@Data
 public class DepartmentService {
     private final DepartmentRepository departmentRepository;
     private final DepartmentAssembler departmentAssembler;

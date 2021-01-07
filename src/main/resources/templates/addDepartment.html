@@ -8,7 +8,7 @@
 Zalogowanie użytkownik:<p th:text="${username}"></p>
 Posiada uprawnienia<p th:text="${role}"></p>
 
-div class="mt-50"></div>
+<div class="mt-50"></div>
 <div class="wrapper">
 
     <div id="formContent">
@@ -17,22 +17,25 @@ div class="mt-50"></div>
         <form th:action="@{/adddepartment}" th:object="${department}" method="post">
             <p class="error" th:text="${commonError}"></p>
 
-            <input id="name" type="text" th:field="*{name}" class="myTextButton" placeholder="tname"/>
-            <div class="error" th:errors="*{name}"></div>
+            <input id="name" type="text" th:field="*{nameOfDepartment}" class="myTextButton" placeholder="name"/>
+            <div class="error" th:errors="*{nameOfDepartment}"></div>
+
+            <input id="location" type="text" th:field="*{location}" class="myTextButton" placeholder="name"/>
+            <div class="error" th:errors="*{location}"></div>
 
 
-            <tr>
-                <td>Osoba zastępująca: </td>
-                <td th:object="${department}">
-                    <select name="replacement" id="replacement">
-                        <!--<select name="replacement person" id="replacement" th:field="*{replacement}" placeholder="replacement">-->
+            <!--  <tr>
+                  <td>Osoba zastępująca: </td>
+                  <td th:object="${department}">
+                      <select name="replacement" id="replacement">
+                          <select name="replacement person" id="replacement" th:field="*{replacement}" placeholder="replacement"> //zakomentoac
                         <option value="">Wybierz lokalizacje</option>
                         <option th:each="user : ${users}"
                                 th:value="${user.id}"
                                 th:text="${user.username}"></option>
                     </select>
                 </td>
-            </tr>
+            </tr>-->
 
 
             <input type="button" value="Powrót" name="backButton"
