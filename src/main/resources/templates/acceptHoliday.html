@@ -25,11 +25,18 @@
         <p class="error" th:text="${commonError}"></p>
 
 
-        <select name="status" th:errors="*{accepted}" id="status"  placeholder="roles">
-            <option value="true">AKCEPTACJA</option>
-            <option value="false">ODRZUCENIE</option>
-        </select>
-                <div class="error" th:errors="*{accepted}"></div>
+        <tr>
+        <td>Złożone wnioski</td>
+        <td th:object="${user}">
+            <select name="replacement" id="replacement">
+                <!--<select name="replacement person" id="replacement" th:field="*{replacement}" placeholder="replacement">-->
+                <option value="">Wybierz zastępstwo</option>
+                <option th:each="user : ${users}"
+                        th:value="${user.id}"
+                        th:text="${user.username}"></option>
+            </select>
+        </td>
+        </tr>
 
         <tr>
             <td><input name="accept" type="submit" value="Aktceptuj" /></td>

@@ -33,7 +33,7 @@ public class LocationController {
             return "location";
         }
         locationService.save(location);
-        return "login";
+        return "index";
     }
 
 }

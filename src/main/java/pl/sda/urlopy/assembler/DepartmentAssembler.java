@@ -12,6 +12,7 @@ public class DepartmentAssembler {
         Department entity = new Department();
         entity.setNameOfDepartment(departmentDto.getNameOfDepartment());
         entity.setLocation(departmentDto.getLocation());
+        entity.setHeadOfDepartment(departmentDto.getHeadOfDepartment());
         return entity;
     }
 }

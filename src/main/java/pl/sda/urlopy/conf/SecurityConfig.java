@@ -41,10 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/dba/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/login").permitAll()
-                .antMatchers("/adddepartment").authenticated()
+                .antMatchers("/adddepartment").hasAuthority("ADMIN")
                 .antMatchers("/registration").hasAuthority("ADMIN")
                 .antMatchers("/location").hasAuthority("ADMIN")
-                .antMatchers("/holiday").hasAuthority("USER")
+                .antMatchers("/holiday").authenticated()
                 .antMatchers("/acceptholiday").authenticated()
                 .anyRequest().authenticated();
 

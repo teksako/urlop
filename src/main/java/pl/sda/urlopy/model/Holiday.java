@@ -13,7 +13,7 @@ import java.util.Date;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Holiday {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "HOLIDAY_ID")
     private Long id;
 

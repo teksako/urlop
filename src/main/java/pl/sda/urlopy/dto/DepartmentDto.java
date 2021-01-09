@@ -9,6 +9,7 @@ public class DepartmentDto {
 
     private Long id;
     private String nameOfDepartment;
+    private String headOfDepartment;
     private String location;
 
 }

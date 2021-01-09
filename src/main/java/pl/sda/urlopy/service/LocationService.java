@@ -21,6 +21,7 @@ public class LocationService {
         locationRepository.save(location);
     }
 
+
     public List<Location> findAll(){
         return locationRepository.findAll();
     }

@@ -7,9 +7,12 @@
 <body>
 <h2>Witaj w aplikacji urlopowej</h2>
 Zalogowany użytkownik:<p th:text="${username}"></p>
-Posiada uprawnienia:<p th:text="${role}"></p>
-<a href="http://localhost:8090/holiday">URLOP</a>
-<a href="http://localhost:8090/acceptholiday">akceptacja</a>
+Posiada uprawnienia:<p th:text="${role}"></p><br>
+<a href="http://localhost:8090/holiday">Złóż wniosek</a><br>
+<a href="http://localhost:8090/acceptholiday">Akceptacja wniosku.</a><br>
+<a href="http://localhost:8090/registration">Nowy użytkownik</a><br>
+<a href="http://localhost:8090/location">Dodaj nową lokacje.</a><br>
+<a href="http://localhost:8090/adddepartment">Dodaj nowy dział.</a><br>
 
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Logout" />

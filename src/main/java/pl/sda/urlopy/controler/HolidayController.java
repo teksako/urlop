@@ -58,7 +58,7 @@ public class HolidayController {
             return "holiday";
         }
         holidayService.save(holiday);
-        return "login";
+        return "index";
     }
 
 }

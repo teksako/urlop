@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Location {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "LOCATION_ID")
     private Long id;
 
