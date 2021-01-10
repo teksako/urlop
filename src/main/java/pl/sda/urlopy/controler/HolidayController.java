@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -27,29 +28,19 @@ public class HolidayController {
     private final UserService userService;
 
     @GetMapping({"/holiday"})
-    public String holidayPage(Model model){
+    public String holidayPage(Model model) {
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("username", principal.getUsername());
         model.addAttribute("role", principal.getAuthorities());
         model.addAttribute("holiday", new HolidayDto());
-//        User u = principal.getUser(principal.getUsername());
-//        request.getSession().setAttribute("userId", u.getId);
+//      User u = principal.getUser(principal.getUsername());
+//      request.getSession().setAttribute("userId", u.getId);
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
 
+
         return "holiday";
     }
-//    @GetMapping({"/holiday"})
-//    public String getUser(Model model){
-//        userService.loadUsers();
-//        List<User> users = Arrays.asList(user);
-//        model.addAttribute("allUsers",users);
-//        for (User allUsers: users) {
-//
-//        }
-//        return "allUsers";
-//
-//    }
 
 
     @PostMapping("/holiday")

@@ -3,43 +3,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Złożone wnioski</title>
+    <title>Akceptacja wniosków</title>
 </head>
 <body>
-<tr>
-    <td>Osoba zastępująca: </td>
-    <!-- <td th:object="${user}">-->
-    <td>
-        <select name="replacement" id="replacement">
-            <!--<select name="replacement person" id="replacement" th:field="*{replacement}" placeholder="replacement">-->
-            <option value="">Wybierz zastępstwo</option>
-            <option th:each="holiday : ${holidays}"
-                    th:value="${holiday.id}"
-                    th:text="${holiday.accepted}"></option>
-        </select>
-    </td>
-</tr>
+Zalogowanie użytkownik:<p th:text="${username}"></p>
+Posiada uprawnienia<p th:text="${role}"></p>
 <div id="formContent"></div>
-    <div class="registrationTitle">Złóż wniosek</div>
-    <form th:action="@{/acceptHoliday}" th:object="${holiday}" method="post">
+    <div class="registrationTitle">Akceptacja wniosków</div>
+    <form th:action="@{/acceptholiday}" th:object="${holiday}" method="post">
         <p class="error" th:text="${commonError}"></p>
 
 
         <tr>
         <td>Złożone wnioski</td>
-        <td th:object="${user}">
-            <select name="replacement" id="replacement">
+        <td >
+            <select name="accepted" id="accepted" th:field="*{id}">
                 <!--<select name="replacement person" id="replacement" th:field="*{replacement}" placeholder="replacement">-->
-                <option value="">Wybierz zastępstwo</option>
-                <option th:each="user : ${users}"
-                        th:value="${user.id}"
-                        th:text="${user.username}"></option>
+                <option value="">Lista wniosków</option>
+                <option th:each="holiday : ${holidays}"
+                        th:value="${holiday.id}"
+                        th:text="${holiday.id}" ></option>
             </select>
         </td>
         </tr>
 
+
+        <select name="accept" id="accept" th:field="*{accepted}" placeholder="accept">
+            <option value="AKCEPTACJA">AKCEPTACJA</option>
+            <option value="ODRZUCENIE">ODRZUCENIE</option>
+        </select>
+
         <tr>
-            <td><input name="accept" type="submit" value="Aktceptuj" /></td>
+            <input type="button" value="Powrót" name="backButton"
+                   onClick="javascript:window.location.href='/index'" class="myButton shortButton" >
+            <input type="submit" value="Zapisz" name="saveButton" class="mySubmitButton">
         </tr>
 </form>
 <form th:action="@{/logout}" method="post">

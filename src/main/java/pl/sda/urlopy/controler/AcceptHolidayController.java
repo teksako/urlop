@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.sda.urlopy.dto.HolidayDto;
+import pl.sda.urlopy.dto.UserDto;
 import pl.sda.urlopy.model.Holiday;
 import pl.sda.urlopy.service.HolidayService;
 
@@ -22,21 +23,22 @@ public class AcceptHolidayController {
     private final HolidayService holidayService;
 
     @GetMapping({"/acceptholiday"})
-    public String acceptHolidayPage(Model model){
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("username", principal.getUsername());
-        model.addAttribute("role", principal.getAuthorities());
+    public String acceptHolidayPage(Model model) {
+        model.addAttribute("holiday", new HolidayDto());
+//        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        model.addAttribute("username", principal.getUsername());
+//        model.addAttribute("role", principal.getAuthorities());
         List<Holiday> holidays = holidayService.findAll();
         model.addAttribute("holidays", holidays);
-    return "acceptholiday";
+        return "acceptholiday";
     }
 
     @PostMapping("/acceptholiday")
     public String saveAcceptHoliday(@ModelAttribute("holiday") HolidayDto holiday, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "holiday";
+            return "acceptholiday";
         }
-        holidayService.save(holiday);
+        holidayService.acceptHoliday(holiday);
         return "index";
     }
 }

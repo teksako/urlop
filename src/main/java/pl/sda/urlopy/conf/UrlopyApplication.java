@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import pl.sda.urlopy.dto.UserDto;
 import pl.sda.urlopy.model.RoleType;
 import pl.sda.urlopy.model.User;
 import pl.sda.urlopy.model.UserRole;
@@ -28,45 +29,47 @@ public class UrlopyApplication implements CommandLineRunner {
 //	@Autowired
 //	private RoleRepository roleRepository;
 
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private PasswordEncoder encoder;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder encoder;
 
-	public static void main(String[] args) {
-		SpringApplication.run(UrlopyApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(UrlopyApplication.class, args);
+    }
 
-	@Override
-	public void run(String... args) throws Exception{
+    @Override
+    public void run(String... args) throws Exception {
 
-		if (userRepository.findAll().size() == 0){
+        if (userRepository.findAll().size() == 0) {
 //			UserRole userRole = new UserRole();
 //			userRole.setType(RoleType.ADMIN);
 //			userRole = roleRepository.save(userRole);
 
-			User user = new User();
-			user.setUsername("user");
-			user.setPassword(encoder.encode("omg11thc"));
-			user.setCreateDate(new Date());
-			user.setFirstname("Paweł");
-			user.setLastname("Kwapisiński");
-			//admin.setRoles(Arrays.asList(userRole));
-			user.setRole("USER");
-			userRepository.save(user);
+            User user = new User();
+            user.setUsername("user");
+            user.setPassword(encoder.encode("omg11thc"));
+            user.setCreateDate(new Date());
+            user.setFirstname("user");
+            user.setLastname("test");
+            //admin.setRoles(Arrays.asList(userRole));
+            user.setRole("USER");
+            userRepository.save(user);
 
-			User admin = new User();
-			admin.setUsername("admin");
-			admin.setPassword(encoder.encode("omg11thc"));
-			admin.setCreateDate(new Date());
-			admin.setFirstname("Paweł");
-			admin.setLastname("Kwapisiński");
-			//admin.setRoles(Arrays.asList(userRole));
-			admin.setRole("ADMIN");
-			userRepository.save(admin);
+            User admin = new User();
+            admin.setUsername("admin");
+            admin.setPassword(encoder.encode("omg11thc"));
+            admin.setCreateDate(new Date());
+            admin.setFirstname("admin");
+            admin.setLastname("test");
+            //admin.setRoles(Arrays.asList(userRole));
+            admin.setRole("ADMIN");
+            userRepository.save(admin);
 
 
-		}
-	}
+        }
+
+    }
+
 
 }

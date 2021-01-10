@@ -14,4 +14,5 @@ public class HolidayDto {
     private Long countOfDays;
     private String accepted;
     private String replacement;
+    //private Long userId;
 }

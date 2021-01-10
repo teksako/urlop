@@ -17,12 +17,12 @@ public class LocationService {
     private final LocationRepository locationRepository;
 
 
-    public void save(Location location){
+    public void save(Location location) {
         locationRepository.save(location);
     }
 
 
-    public List<Location> findAll(){
+    public List<Location> findAll() {
         return locationRepository.findAll();
     }
 }

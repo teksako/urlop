@@ -19,7 +19,7 @@ public class LocationController {
     private final LocationService locationService;
 
     @GetMapping({"/location"})
-    public String locationPage(Model model){
+    public String locationPage(Model model) {
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("username", principal.getUsername());
         model.addAttribute("role", principal.getAuthorities());

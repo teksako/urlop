@@ -2,19 +2,26 @@ package pl.sda.urlopy.service;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.urlopy.assembler.UserAssembler;
 import pl.sda.urlopy.dto.UserDto;
 import pl.sda.urlopy.model.User;
 import pl.sda.urlopy.repository.RoleRepository;
 import pl.sda.urlopy.repository.UserRepository;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Data
-public class UserService  {
+public class UserService {
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserAssembler userAssembler;
     private final RoleRepository roleRepository;
@@ -27,13 +34,24 @@ public class UserService  {
         return savedUser.getId();
     }
 
-    public List<User> findAll(){
+    public List<User> findAll() {
         return userRepository.findAll();
     }
-//
-//   public String loadUsers(){
-//       //User user = userAssembler.toEntity(userDto);
-//        User loadUser = userRepository.findAllByUsername();
-//        return loadUser.getUsername();
-//   }
+
+
+    public UserDetails loadUserByUsername(String username) {
+        return (UserDetails) userRepository.findByUsername(username);
+    }
+
+    public void update(UserDto userDto) {
+
+        Optional<User> user1 = userRepository.findById(userDto.getId());
+        if (user1.isPresent()) {
+            User user = user1.get();
+            //user.setId(userDto.getId());
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            userRepository.save(user);
+        }
+    }
+
 }

@@ -10,7 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Department {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "DEPARTMENT_ID")
     private Long id;
 

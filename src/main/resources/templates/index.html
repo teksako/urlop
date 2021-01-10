@@ -8,14 +8,18 @@
 <h2>Witaj w aplikacji urlopowej</h2>
 Zalogowany użytkownik:<p th:text="${username}"></p>
 Posiada uprawnienia:<p th:text="${role}"></p><br>
+<!--ID user: <p th:value="${currentUser.id}"></p><br>-->
+<div sec:authorize="hasAuthority('ADMIN')">
+   <a href="http://localhost:8090/acceptholiday">Akceptacja wniosku.</a><br>
+   <a href="http://localhost:8090/registration">Nowy użytkownik</a><br>
+   <a href="http://localhost:8090/location">Dodaj nową lokacje.</a><br>
+   <a href="http://localhost:8090/adddepartment">Dodaj nowy dział.</a><br>
+</div>
 <a href="http://localhost:8090/holiday">Złóż wniosek</a><br>
-<a href="http://localhost:8090/acceptholiday">Akceptacja wniosku.</a><br>
-<a href="http://localhost:8090/registration">Nowy użytkownik</a><br>
-<a href="http://localhost:8090/location">Dodaj nową lokacje.</a><br>
-<a href="http://localhost:8090/adddepartment">Dodaj nowy dział.</a><br>
+<a href="http://localhost:8090/changepassword">Zmień hasło</a><br>
 
 <form th:action="@{/logout}" method="post">
-    <input type="submit" value="Logout" />
+   <input type="submit" value="Logout" />
 </form>
 </form>
 </body>

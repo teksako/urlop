@@ -22,7 +22,5 @@ public class DepartmentService {
         Department savedDepartment = departmentRepository.save(department);
         return savedDepartment.getId();
     }
-//    public void save(Department department){
-//        departmentRepository.save(department);
-//    }
+
 }
