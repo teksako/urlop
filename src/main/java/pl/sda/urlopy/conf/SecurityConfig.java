@@ -14,18 +14,16 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
-                .usersByUsernameQuery("SELECT username,password,1"+" FROM user"+" WHERE username=?")
-                .authoritiesByUsernameQuery("SELECT username,role,1"+" FROM user"+" WHERE username=?")
+                .usersByUsernameQuery("SELECT username,password,1" + " FROM user" + " WHERE username=?")
+                .authoritiesByUsernameQuery("SELECT username,role,1" + " FROM user" + " WHERE username=?")
                 .dataSource(dataSource);
-        //auth.userDetailsService(userDetailsService());
-
     }
 
     @Override

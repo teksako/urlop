@@ -5,9 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.sda.urlopy.assembler.HolidayAssembler;
 import pl.sda.urlopy.dto.HolidayDto;
-import pl.sda.urlopy.dto.UserDto;
 import pl.sda.urlopy.model.Holiday;
-import pl.sda.urlopy.model.User;
 import pl.sda.urlopy.repository.HolidayRepository;
 
 import java.util.List;

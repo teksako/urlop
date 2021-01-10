@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.sda.urlopy.dto.HolidayDto;
 import pl.sda.urlopy.model.Location;
 import pl.sda.urlopy.service.LocationService;
 

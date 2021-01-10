@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import pl.sda.urlopy.assembler.DepartmentAssembler;
 import pl.sda.urlopy.dto.DepartmentDto;
 import pl.sda.urlopy.model.Department;
-import pl.sda.urlopy.model.Location;
 import pl.sda.urlopy.repository.DepartmentRepository;
 
 

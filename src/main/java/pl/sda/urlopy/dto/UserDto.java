@@ -1,9 +1,8 @@
 package pl.sda.urlopy.dto;
 
-import com.sun.istack.NotNull;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.sda.urlopy.model.AccountStatus;
 import javax.validation.constraints.Size;
 import java.util.Date;
 

@@ -13,12 +13,8 @@ import pl.sda.urlopy.dto.HolidayDto;
 import pl.sda.urlopy.model.User;
 import pl.sda.urlopy.service.HolidayService;
 import pl.sda.urlopy.service.UserService;
-
-import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+
 
 
 @Controller
