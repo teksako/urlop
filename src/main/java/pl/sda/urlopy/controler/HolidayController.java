@@ -44,6 +44,8 @@ public class HolidayController {
         if (bindingResult.hasErrors()) {
             return "holiday";
         }
+        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        holiday.setActualLoggedUser(principal.getUsername());
         holidayService.save(holiday);
         return "index";
     }

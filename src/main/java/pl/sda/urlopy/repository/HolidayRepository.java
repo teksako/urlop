@@ -8,4 +8,5 @@ import java.util.List;
 public interface HolidayRepository extends JpaRepository<Holiday, Long> {
 
     List<Holiday> findAll();
+    //List<Holiday> findAllByActualLoggedUser();
 }

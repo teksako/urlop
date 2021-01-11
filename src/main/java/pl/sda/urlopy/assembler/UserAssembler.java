@@ -20,6 +20,7 @@ public class UserAssembler {
         entity.setUsername(userDto.getUsername());
         entity.setPassword(passwordEncoder.encode(userDto.getPassword()));
         entity.setRole(userDto.getRole());
+        entity.setDepartmentId(userDto.getDepartmentId());
         return entity;
     }
 }

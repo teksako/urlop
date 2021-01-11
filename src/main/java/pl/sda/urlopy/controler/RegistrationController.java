@@ -10,13 +10,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.sda.urlopy.dto.UserDto;
+import pl.sda.urlopy.model.Department;
+import pl.sda.urlopy.service.DepartmentService;
 import pl.sda.urlopy.service.UserService;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class RegistrationController {
 
     private final UserService userService;
+    private final DepartmentService departmentService;
 
 
     @GetMapping("/registration")
@@ -25,6 +30,8 @@ public class RegistrationController {
         model.addAttribute("username", principal.getUsername());
         model.addAttribute("role", principal.getAuthorities());
         model.addAttribute("user", new UserDto());
+        List<Department> departments = departmentService.findAll();
+        model.addAttribute("departments", departments);
         return "registration";
     }
 

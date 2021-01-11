@@ -18,7 +18,7 @@ private UserDto userDto;
         entity.setCountOfDays(holidayDto.getCountOfDays());
         entity.setAccepted(holidayDto.getAccepted());
         entity.setReplacement(holidayDto.getReplacement());
-        //entity.setId(userDto.getId().longValue());
+        entity.setActualLoggedUser(holidayDto.getActualLoggedUser());
         return entity;
     }
 }

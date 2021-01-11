@@ -21,20 +21,18 @@ Posiada uprawnienia<p th:text="${role}"></p>
 
         <form th:action="@{/adddepartment}" th:object="${department}" method="post">
             <p class="error" th:text="${commonError}"></p>
-
+            <tr>
+            <td>Nazwa działu:</td>
             <input id="name" type="text" th:field="*{nameOfDepartment}" class="myTextButton" placeholder="name"/>
             <div class="error" th:errors="*{nameOfDepartment}"></div>
-            <!--
-                        <input id="location" type="text" th:field="*{location}" class="myTextButton" placeholder="name"/>
-                        <div class="error" th:errors="*{location/div>
--->
+            </tr>
 
             <tr>
                 <td>Wybierz lokacje:</td>
                 <td th:object="${location}">
                     <select name="location" id="location">
                                       <!--   <select name="replacement person" id="replacement" th:field="*{replacement}" placeholder="replacement"> //zakomentoac-->
-                        <option value="">Wybierz lokalizacje</option>
+                        <option value="">Wybierz</option>
                         <option th:each="location : ${locations}"
                                 th:value="${location.id}"
                                 th:text="${location.name}"></option>
@@ -47,19 +45,18 @@ Posiada uprawnienia<p th:text="${role}"></p>
             <td th:object="${headOfDepartment}">
                 <select name="headOfDepartment" id="headOfDepartment">
                     <!--<select name="replacement person" id="replacement" th:field="*{replacement}" placeholder="replacement">-->
-                    <option value="">Wybierz zastępstwo</option>
+                    <option value="">Wybierz</option>
                     <option th:each="user : ${users}"
                             th:value="${user.id}"
                             th:text="${user.username}"></option>
                 </select>
             </td>
             </tr>
-
-
-               <input type="button" value="Powrót" name="backButton"
-                      onClick="javascript:window.location.href='/index'" class="myButton shortButton" >
-               <input type="submit" value="Zapisz" name="saveButton" class="mySubmitButton">
-
+            <tr>
+            <input type="submit" value="Zapisz" name="saveButton" class="mySubmitButton">
+            <input type="button" value="Powrót" name="backButton"
+                   onClick="javascript:window.location.href='/index'" class="myButton shortButton" >
+            </tr>
            </form>
        </div>
    </div>

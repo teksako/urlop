@@ -47,6 +47,19 @@ Posiada uprawnienia<p th:text="${role}"></p>
             </select>
             <div class="error" th:errors="*{role}"></div>
 
+            <tr>
+                <td>Dział: </td>
+                <td th:field="${departmentId}">
+                    <select name="replacement" id="replacement">
+                        <!--<select name="replacement person" id="replacement" th:field="*{replacement}" placeholder="replacement">-->
+                        <option value="">Wybierz zastępstwo</option>
+                        <option th:each="department : ${departments}"
+                                th:value="${department.id}"
+                                th:text="${department.nameOfDepartment}"></option>
+                    </select>
+                </td>
+            </tr>
+
 
             <input type="button" value="Powrót" name="backButton"
                    onClick="javascript:window.location.href='/index'" class="myButton shortButton" >

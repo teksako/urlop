@@ -8,6 +8,8 @@ import pl.sda.urlopy.dto.DepartmentDto;
 import pl.sda.urlopy.model.Department;
 import pl.sda.urlopy.repository.DepartmentRepository;
 
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +23,7 @@ public class DepartmentService {
         Department savedDepartment = departmentRepository.save(department);
         return savedDepartment.getId();
     }
+
+    public List<Department> findAll(){ return departmentRepository.findAll();}
 
 }

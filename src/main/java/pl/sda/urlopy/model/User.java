@@ -39,6 +39,9 @@ public class User  {
     @Column
     private String role;
 
+    @Column
+    private String departmentId;
+
 //   @Column
 //    @Enumerated(EnumType.STRING)
 //   private AccountStatus status;

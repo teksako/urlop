@@ -37,8 +37,8 @@ public class Holiday {
     @Column
     private String replacement;
 
-//    @Column
-//    private Long userId;
+    @Column
+    private String actualLoggedUser;
 
 
 }

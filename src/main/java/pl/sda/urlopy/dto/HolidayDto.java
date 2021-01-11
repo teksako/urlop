@@ -12,7 +12,7 @@ public class HolidayDto {
     private Date startDate;
     private Date endDate;
     private Long countOfDays;
-    private String accepted;
+    private String accepted = "BRAK DECYZJI";
     private String replacement;
-    //private Long userId;
+    private String actualLoggedUser;
 }

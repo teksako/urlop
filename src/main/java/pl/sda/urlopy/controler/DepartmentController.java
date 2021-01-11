@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.sda.urlopy.dto.DepartmentDto;
+import pl.sda.urlopy.model.Department;
 import pl.sda.urlopy.model.Location;
 import pl.sda.urlopy.model.User;
 import pl.sda.urlopy.service.DepartmentService;
@@ -35,6 +36,7 @@ public class DepartmentController {
         model.addAttribute("locations", locations);
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
+
         return "addDepartment";
     }
 
