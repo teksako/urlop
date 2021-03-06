@@ -44,8 +44,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/location").hasAuthority("ADMIN")
                 .antMatchers("/holiday").authenticated()
                 .antMatchers("/raport").authenticated()
-                .antMatchers("/changepassword").hasAuthority("ADMIN")
+                .antMatchers("/resetpassword").hasAuthority("ADMIN")
                 .antMatchers("/acceptholiday").hasAuthority("ADMIN")
+                .antMatchers("/updatetholiday").hasAuthority("ADMIN")
+                .antMatchers("/updatetDepartment").hasAuthority("ADMIN")
                 .anyRequest().authenticated();
 
         http.formLogin()

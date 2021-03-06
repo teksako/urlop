@@ -27,6 +27,7 @@ public class HolidayService {
     private final UserRepository userRepository;
     private final UserAssembler userAssembler;
 
+
     public Long save(HolidayDto holidayDto) {
         Holiday holiday = holidayAssembler.toEntity(holidayDto);
         Holiday savedHoliday = holidayRepository.save(holiday);
@@ -34,16 +35,18 @@ public class HolidayService {
     }
 
     public List<Holiday> findAllByAcceptedIs() {
+
         return holidayRepository.findAllByAcceptedIs("BRAK DECYZJI");
     }
 
     public List<Holiday> findAllByActualLoggedUserIs(){
-        //User user = userAssembler.toEntity(userDto).
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String owner = principal.getUsername();
+        //User user = userAssembler.toEntity(userDto).
         //model.addAttribute("owner", principal.getUsername());
         return holidayRepository.findAllByActualLoggedUserIs(owner);
     }
+
 
 
     public List<Holiday> findAll() {

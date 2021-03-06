@@ -3,6 +3,7 @@ package pl.sda.urlopy.service;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class UserService {
     private final UserAssembler userAssembler;
     private final RoleRepository roleRepository;
 
+
     public Long save(UserDto userDto) {
         User user = userAssembler.toEntity(userDto);
 //        Optional<UserRole> userRole = roleRepository.findByType(RoleType.ADMIN);
@@ -38,12 +40,22 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public List<User> findAllByUserIsFalse(){
+        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+         String owner = principal.getUsername();
+        return userRepository.findAllByUsernameIsNot(owner);
+    }
+
 
     public UserDetails loadUserByUsername(String username) {
         return (UserDetails) userRepository.findByUsername(username);
     }
 
-    public void update(UserDto userDto) {
+    public User changePassword(String password){
+                return userRepository.findUsersByPassword(password);
+    }
+
+    public void resetPasswordByAdmin(UserDto userDto) {
 
         Optional<User> user1 = userRepository.findById(userDto.getId());
         if (user1.isPresent()) {

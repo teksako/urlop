@@ -31,7 +31,8 @@ public class HolidayController {
         model.addAttribute("holiday", new HolidayDto());
 //      User u = principal.getUser(principal.getUsername());
 //      request.getSession().setAttribute("userId", u.getId);
-        List<User> users = userService.findAll();
+        List<User> users = userService.findAllByUserIsFalse();
+       // List<User> users = userService.findAll();
         model.addAttribute("users", users);
 
 

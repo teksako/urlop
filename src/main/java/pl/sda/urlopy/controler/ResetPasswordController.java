@@ -15,26 +15,26 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class changePasswordController {
+public class ResetPasswordController {
 
     private final UserService userService;
 
 
-    @GetMapping("/changepassword")
+    @GetMapping("/resetpassword")
     public String registerPage(Model model) {
         model.addAttribute("user", new UserDto());
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
-        return "changepassword";
+        return "resetpassword";
     }
 
-    @PostMapping("/changepassword")
+    @PostMapping("/resetpassword")
     public String saveUser(@ModelAttribute("user") UserDto user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "changepassword";
+            return "resetpassword";
         }
 
-        userService.update(user);
+        userService.resetPasswordByAdmin(user);
         return "index";
     }
 

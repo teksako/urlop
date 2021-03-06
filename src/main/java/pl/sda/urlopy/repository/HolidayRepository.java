@@ -12,5 +12,6 @@ public interface HolidayRepository extends JpaRepository<Holiday, Long> {
     List<Holiday> findAll();
     List<Holiday> findAllByAcceptedIs(String accept);
     List<Holiday> findAllByActualLoggedUserIs(String owner);
+    //List<Holiday> findAllByActualLoggedUserIsFalse(String user);
 
 }

@@ -11,5 +11,9 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
  User findByUsername(String username);
  List<User> findAll();
+ //List<User> findAllByActualLoggedUserIsFalse(String owner);
+ List<User> findAllByUsernameIsNot(String owner);
+ User findUsersByPassword(String password);
+
 
 }

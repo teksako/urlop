@@ -21,33 +21,34 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class DepartmentController {
+public class UpdateDepartment {
     private final DepartmentService departmentService;
     private final LocationService locationService;
     private final UserService userService;
 
-    @GetMapping("/addDepartment")
-    public String addNewDepartment(Model model) {
+    @GetMapping("/updateDepartment")
+    public String department(Model model) {
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("username", principal.getUsername());
         model.addAttribute("role", principal.getAuthorities());
-        model.addAttribute("department", new DepartmentDto());
-        List<Location> locations = locationService.findAll();
-        model.addAttribute("locations", locations);
+
+       // model.addAttribute("department", new DepartmentDto());
+        List<Department> departments = departmentService.findAll();
+        model.addAttribute("departments", departments);
+//        List<Location> locations = locationService.findAll();
+//        model.addAttribute("locations", locations);
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
 
-        return "addDepartment";
+        return "updateDepartment";
     }
 
-    @PostMapping("/addDepartment")
+    @PostMapping("/updateDepartment")
     public String saveDepartment(@ModelAttribute("department") DepartmentDto department, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "addDepartment";
+            return "updateDepartment";
         }
-        departmentService.save(department);
+        departmentService.departmentUpdate(department);
         return "index";
     }
-
-
 }
