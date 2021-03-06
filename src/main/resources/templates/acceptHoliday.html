@@ -22,7 +22,7 @@ Posiada uprawnienia<p th:text="${role}"></p>
                 <option value="">Lista wniosków</option>
                 <option th:each="holiday : ${holidays}"
                         th:value="${holiday.id}"
-                        th:text="${holiday.id}" ></option>
+                        th:text="${holiday.actualLoggedUser}" ></option>
             </select>
         </td>
         </tr>

@@ -6,10 +6,13 @@
 </head>
 <body>
 <tr th:each="holiday: ${holidays}">
-    <td th:text="${holiday.getId()}"/><br>
-    <td th:text="${holiday.getStartDate()}"/><br>
-    <td th:text="${holiday.getEndDate()}"/><br>
+    <td th:text="${holiday.getId()}"/>
+    <td th:text="${holiday.getStartDate()}"/>
+    <td th:text="${holiday.getEndDate()}"/>
+    <td th:text="${holiday.getCountOfDays()}"/>
+    <td th:text="${holiday.getAccepted()}"/>
     <p>=================</p>
+
 </tr>
 </body>
 </html>

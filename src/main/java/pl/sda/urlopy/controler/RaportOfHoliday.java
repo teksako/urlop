@@ -22,7 +22,7 @@ public class RaportOfHoliday {
 
     @GetMapping({"/raport"})
     public String raportPage(Model model) {
-        List<Holiday> holidays = holidayService.findAll();
+        List<Holiday> holidays = holidayService.findAllByActualLoggedUserIs();
         model.addAttribute("holidays", holidays);
         return "raportofholiday";
     }

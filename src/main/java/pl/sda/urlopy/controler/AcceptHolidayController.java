@@ -25,7 +25,7 @@ public class AcceptHolidayController {
 //        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        model.addAttribute("username", principal.getUsername());
 //        model.addAttribute("role", principal.getAuthorities());
-        List<Holiday> holidays = holidayService.findAll();
+        List<Holiday> holidays = holidayService.findAllByAcceptedIs();
         model.addAttribute("holidays", holidays);
         return "acceptholiday";
     }
