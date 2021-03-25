@@ -1,34 +1,36 @@
 package pl.sda.urlopy.controler;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import pl.sda.urlopy.dto.UserDto;
 import pl.sda.urlopy.model.User;
 import pl.sda.urlopy.repository.UserRepository;
 import pl.sda.urlopy.service.UserService;
 
+import java.util.List;
+
 
 @Controller
+@RequiredArgsConstructor
 public class MainController {
 
     @Autowired
-    UserService userService;
+    private final UserService userService;
 
-    UserRepository userRepository;
 
     @GetMapping({"/", "/index"})
     public String mainPage(Model model) {
+        List<User> users = userService.findAll();
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("username", principal.getUsername());
+//        model.addAttribute("firstname",  userDto.getFirstname());
+//        model.addAttribute("lastname", userDto.getLastname());
         model.addAttribute("role", principal.getAuthorities());
-
-//          User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//          User user = (User) userRepository.findByUsername(username);
-
-
         return "index";
     }
 }

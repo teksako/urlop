@@ -20,6 +20,7 @@ import java.util.Optional;
 public class DepartmentService {
     private final DepartmentRepository departmentRepository;
     private final DepartmentAssembler departmentAssembler;
+    //private final DepartmentService departmentService;
 
     public Long save(DepartmentDto departmentDto) {
         Department department = departmentAssembler.toEntity(departmentDto);
@@ -27,13 +28,19 @@ public class DepartmentService {
         return savedDepartment.getId();
     }
 
-    public List<Department> findAll(){ return departmentRepository.findAll();}
+    public List<Department> findAll() {
+        return departmentRepository.findAll();
+    }
+//    public List<Department> findAllById(long id){
+//
+//        return departmentRepository.findAllById(id);}
 
 
-//      AKTUALIZACJA DZIAŁÓW
+    //      AKTUALIZACJA DZIAŁÓW
     public void departmentUpdate(DepartmentDto departmentDto) {
         Optional<Department> department = departmentRepository.findById(departmentDto.getId());
         department.get().setHeadOfDepartment(departmentDto.getHeadOfDepartment());
+        department.get().setLocation(departmentDto.getLocation());
         departmentRepository.save(department.get());
     }
 

@@ -20,5 +20,5 @@ public class UserDto {
     private Date createData;
     private String role;
  //   private AccountStatus status;
-    private String departmentId;
+    private String department;
 }

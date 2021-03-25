@@ -10,8 +10,10 @@ import java.util.List;
 public interface HolidayRepository extends JpaRepository<Holiday, Long> {
 
     List<Holiday> findAll();
-    List<Holiday> findAllByAcceptedIs(String accept);
+
+    List<Holiday> findAllByAcceptedIsAndActualLoggedUserIsNot(String accept, String user);
+
     List<Holiday> findAllByActualLoggedUserIs(String owner);
-    //List<Holiday> findAllByActualLoggedUserIsFalse(String user);
+
 
 }

@@ -49,10 +49,11 @@ Posiada uprawnienia<p th:text="${role}"></p>
 
             <tr>
                 <td>Dział: </td>
-                <td th:field="${departmentId}">
-                    <select name="replacement" id="replacement">
+
+                <td th:object="${department}">
+                    <select name="department" id="department">
                         <!--<select name="replacement person" id="replacement" th:field="*{replacement}" placeholder="replacement">-->
-                        <option value="">Wybierz zastępstwo</option>
+                        <option value="">Wybierz dział</option>
                         <option th:each="department : ${departments}"
                                 th:value="${department.id}"
                                 th:text="${department.nameOfDepartment}"></option>

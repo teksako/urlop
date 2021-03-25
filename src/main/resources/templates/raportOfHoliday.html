@@ -1,18 +1,39 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"  lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Twoje urlopy.</title>
+
 </head>
 <body>
-<tr th:each="holiday: ${holidays}">
-    <td th:text="${holiday.getId()}"/>
-    <td th:text="${holiday.getStartDate()}"/>
-    <td th:text="${holiday.getEndDate()}"/>
-    <td th:text="${holiday.getCountOfDays()}"/>
-    <td th:text="${holiday.getAccepted()}"/>
-    <p>=================</p>
+<h2>Zalogowany użytkownik:<p th:text="${username}"></p></h2>
 
-</tr>
+<table border="1" class = "table table-striped table-responsive-md">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Początek urlopu</th>
+        <th>Koniec urlopu</th>
+        <th>Liczba dni</th>
+        <th>Decyzja</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="holiday: ${holidays}">
+        <td th:text="${holiday.getId()}"></td>
+        <td th:text="${holiday.getStartDate()}"></td>
+        <td th:text="${holiday.getEndDate()}"></td>
+        <td th:text="${holiday.getCountOfDays()}"></td>
+        <td th:text="${holiday.getAccepted()}"></td>
+    </tr>
+    </tbody>
+</table>
+<input type="button" value="Powrót" name="backButton"
+       onClick="javascript:window.location.href='/index'" class="btn btn-primary" >
+<a th:href="@{/exportpdf}" class="btn btn-primary">Generuj PDF</a>
 </body>
 </html>

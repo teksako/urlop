@@ -19,7 +19,7 @@ Posiada uprawnienia<p th:text="${role}"></p>
     <div id="formContent">
         <div class="registrationTitle" >Dodaj dział:</div>
 
-        <form th:action="@{/adddepartment}" th:object="${department}" method="post">
+        <form th:action="@{/addDepartment}" th:object="${department}" method="post">
             <p class="error" th:text="${commonError}"></p>
             <tr>
             <td>Nazwa działu:</td>

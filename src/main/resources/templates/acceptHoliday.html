@@ -12,8 +12,6 @@ Posiada uprawnienia<p th:text="${role}"></p>
     <div class="registrationTitle">Akceptacja wniosków</div>
     <form th:action="@{/acceptholiday}" th:object="${holiday}" method="post">
         <p class="error" th:text="${commonError}"></p>
-
-
         <tr>
         <td>Złożone wnioski</td>
         <td >

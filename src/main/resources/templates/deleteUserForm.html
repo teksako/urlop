@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Managment System</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+<h2>Witaj w aplikacji urlopowej </h2>
+Zalogowany użytkownik:<p th:text="${username}"></p>
+Posiada uprawnienia:<p th:text="${role}"></p><br>
+<table border="1" class="table table-striped table-responsive-md">
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.firstname}"></td>
+        <td th:text="${user.lastname}"></td>
+        <td th:text="${user.username}"></td>
+        <td><a th:href="@{/deleteUser/{id}(id=${user.id})}" class="btn btn-danger">USUN</a>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<tr>
+
+    <form th:action="@{/deleteUser}" th:object="${user}" method="post">
+        <p class="error" th:text="${commonError}"></p>
+        <td>Kierownik działu:</td>
+        <td >
+            <select name="headOfDepartment" id="headOfDepartment" placeholder="accept" th:field="*{id}">
+                <option th:each="user : ${users}"
+                        th:value="${user.id}"
+                        th:text="${user.username}"></option>
+            </select>
+
+
+<tr>
+
+    <input type="submit" value="Usuń" name="deleteButton" class="btn btn-danger">
+</tr>
+
+</form>
+</tr>
+<input type="button" value="Powrót" name="backButton"
+       onClick="javascript:window.location.href='/index'" class="btn btn-primary">
+</body>
+</html>

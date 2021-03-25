@@ -40,7 +40,7 @@ public class User  {
     private String role;
 
     @Column
-    private String departmentId;
+    private String department;
 
 //   @Column
 //    @Enumerated(EnumType.STRING)

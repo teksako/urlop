@@ -3,45 +3,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Akceptacja wniosków</title>
+    <title>Edytuj użytkownika</title>
 </head>
 <body>
 Zalogowanie użytkownik:<p th:text="${username}"></p>
 Posiada uprawnienia<p th:text="${role}"></p>
 <div id="formContent"></div>
 <div class="registrationTitle">Edytuj dział:</div>
-<form th:action="@{/updateDepartment}" th:object="${department}" method="post">
+<form th:action="@{/updateUserForm}" th:object="${user}" method="post">
     <p class="error" th:text="${commonError}"></p>
     <tr>
-        <td>Wybierz dział:</td>
+        <td>Wybierz użytkownika:</td>
         <td >
-            <select name="nameOfDepartment" id="nameOfDepartment" th:field="*{id}">
+            <select name="user"  th:field="*{id}">
                 <!--<select name="replacement person" id="replacement" th:field="*{replacement}" placeholder="replacement">-->
                 <option value="">Wybierz</option>
-                <option th:each="department : ${departments}"
-                        th:value="${department.id}"
-                        th:text="${department.nameOfDepartment}"></option>
+                <option th:each="user : ${users}"
+                        th:value="${user.id}"
+                        th:text="${user.username}"></option>
             </select>
         </td>
     </tr>
 
-    <td>Lokalizacja:</td>
-    <td th:field="${location}">
-        <select name="location" id="location"  placeholder="location" >
-            <option th:each="location : ${locations}"
-                    th:value="${location.id}"
-                    th:text="${location.name}"></option>
+    <td>Dział:</td>
+    <td th:field="*{department}">
+        <select name="department" id="department"  placeholder="department" >
+            <option  value=""
+                    th:each="department : ${departments}"
+                    th:value="${department.id}"
+                    th:text="${department.nameOfDepartment}"></option>
         </select>
     </td>
 
-    <td>Kierownik działu:</td>
-    <td th:field="${headOfDepartment}">
-    <select name="headOfDepartment" id="headOfDepartment"  placeholder="accept">
-        <option th:each="user : ${users}"
-                th:value="${user.id}"
-                th:text="${user.username}"></option>
+    <td>Uprawnienia:</td>
+    <td>
+    <select name="role" id="role" th:field="*{role}" placeholder="role">
+        <option value="USER">USER</option>
+        <option value="ADMIN">ADMINISTRATOR</option>
     </select>
     </td>
+
     <tr>
         <input type="button" value="Powrót" name="backButton"
                onClick="javascript:window.location.href='/index'" class="myButton shortButton" >

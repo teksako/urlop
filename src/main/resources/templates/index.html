@@ -4,25 +4,32 @@
     <meta charset="UTF-8">
     <title>Main page</title>
 </head>
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous">
 <body>
-<h2>Witaj w aplikacji urlopowej</h2>
+<h2>Witaj w aplikacji urlopowej </h2>
 Zalogowany użytkownik:<p th:text="${username}"></p>
 Posiada uprawnienia:<p th:text="${role}"></p><br>
 <!--ID user: <p th:value="${currentUser.id}"></p><br>-->
 <div sec:authorize="hasAuthority('ADMIN')">
-   <a href="http://localhost:8090/acceptholiday">Akceptacja wniosku.</a><br>
-   <a href="http://localhost:8090/registration">Nowy użytkownik</a><br>
-   <a href="http://localhost:8090/location">Dodaj nową lokacje.</a><br>
-   <a href="http://localhost:8090/adddepartment">Dodaj nowy dział.</a><br>
-    <a href="http://localhost:8090/updateDepartment">Edytuj dział. -- nie działa</a><br>
-    <a href="http://localhost:8090/resetpassword">Resetuj hasła!</a><br>
+    <a th:href="@{/acceptholiday}">Akceptacja wniosku.</a><br>
+    <a th:href="@{/registration}">Nowy użytkownik</a><br>
+    <a th:href="@{/location}">Dodaj nową lokacje.</a><br>
+    <a th:href="@{/addDepartment}">Dodaj nowy dział.</a><br>
+    <a th:href="@{/updateDepartment}">Edytuj dział.</a><br>
+    <a th:href="@{/resetpassword}">Resetuj hasła!</a><br>
+    <a th:href="@{/deleteUserForm}">Usuń użytkownika.</a><br>
+    <a th:href="@{/updateUserForm}">Edytuj użytkownika.</a><br>
 </div>
-<a href="http://localhost:8090/holiday">Złóż wniosek</a><br>
-<a href="http://localhost:8090/changePassword">Zmień hasło.</a><br>
-<a href="http://localhost:8090/raport">Raport</a><br>
-
+<div>
+    <a th:href="@{/holiday}">Złóż wniosek</a><br>
+    <a th:href="@{/changePassword}">Zmień hasło. -- nie działa</a><br>
+    <a th:href="@{/raport}">Raport</a><br>
+</div>
 <form th:action="@{/logout}" method="post">
-   <input type="submit" value="Logout" />
+    <input type="submit" value="Logout" class="btn btn-danger"/>
 </form>
 </form>
 </body>

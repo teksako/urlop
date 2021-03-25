@@ -1,6 +1,7 @@
 package pl.sda.urlopy.controler;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.sda.urlopy.dto.DepartmentDto;
-import pl.sda.urlopy.model.Department;
 import pl.sda.urlopy.model.Location;
 import pl.sda.urlopy.model.User;
 import pl.sda.urlopy.service.DepartmentService;
@@ -22,6 +22,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class DepartmentController {
+    @Autowired
     private final DepartmentService departmentService;
     private final LocationService locationService;
     private final UserService userService;

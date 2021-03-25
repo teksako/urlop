@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.sda.urlopy.dto.UserDto;
 import pl.sda.urlopy.model.RoleType;
@@ -15,6 +16,7 @@ import pl.sda.urlopy.model.User;
 import pl.sda.urlopy.model.UserRole;
 import pl.sda.urlopy.repository.RoleRepository;
 import pl.sda.urlopy.repository.UserRepository;
+import pl.sda.urlopy.service.UserService;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -33,14 +35,18 @@ public class UrlopyApplication implements CommandLineRunner {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder encoder;
+//    @Autowired
+//    private UserService userService;
+
 
     public static void main(String[] args) {
         SpringApplication.run(UrlopyApplication.class, args);
+
     }
 
     @Override
     public void run(String... args) throws Exception {
-
+       // userService.deleteUser("ss");
         if (userRepository.findAll().size() == 0) {
 //			UserRole userRole = new UserRole();
 //			userRole.setType(RoleType.ADMIN);
@@ -68,6 +74,7 @@ public class UrlopyApplication implements CommandLineRunner {
 
 
         }
+
 
     }
 
