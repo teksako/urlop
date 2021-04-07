@@ -25,10 +25,11 @@ public class MainController {
 
     @GetMapping({"/", "/index"})
     public String mainPage(Model model) {
-        List<User> users = userService.findAll();
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("username", principal.getUsername());
-        model.addAttribute("role", principal.getAuthorities());
+        //List<User> users = userService.findAll();
+        //UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //model.addAttribute("username", principal.getUsername());
+        model.addAttribute("role", userService.actualLoginUserRole());
+        model.addAttribute("username", userService.userData(userService.findUserByUsername()));
         return "index";
     }
 }

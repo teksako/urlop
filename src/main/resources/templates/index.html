@@ -15,12 +15,13 @@
         <div class="navbar-header">
 
             <a class="navbar-brand">
-              Zalogowany użytkownik: <a th:text="${username}" class="navbar-brand"></a>
+                Zalogowany użytkownik: <a th:text="${username}" class="navbar-brand"></a>
             </a>
 
         </div>
         <div class="av navbar-nav navbar-right">
-            <form th:action="@{/logout}" method="post" ><strong><input type="submit" value="Wyloguj" class="navbar-brand"/></strong></form>
+            <form th:action="@{/logout}" method="post"><strong><input type="submit" value="Wyloguj"
+                                                                      class="navbar-brand"/></strong></form>
 
         </div>
     </div>
@@ -45,7 +46,5 @@ Posiada uprawnienia:<p th:text="${role}"></p>
 </div>
 
 
-
-</form>
 </body>
 </html>

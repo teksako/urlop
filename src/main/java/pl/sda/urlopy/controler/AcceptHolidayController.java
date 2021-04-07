@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pl.sda.urlopy.dto.HolidayDto;
 import pl.sda.urlopy.model.Holiday;
 import pl.sda.urlopy.service.HolidayService;
+import pl.sda.urlopy.service.UserService;
 
 import java.util.List;
 
@@ -20,12 +21,12 @@ import java.util.List;
 public class AcceptHolidayController {
 
     private final HolidayService holidayService;
+    private final UserService userService;
 
     @GetMapping({"/acceptholiday"})
     public String acceptHolidayPage(Model model) {
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("username", principal.getUsername());
-        model.addAttribute("role", principal.getAuthorities());
+        model.addAttribute("role", userService.actualLoginUserRole());
+        model.addAttribute("username", userService.userData(userService.findUserByUsername()));
         model.addAttribute("holiday", new HolidayDto());
 //        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        model.addAttribute("username", principal.getUsername());

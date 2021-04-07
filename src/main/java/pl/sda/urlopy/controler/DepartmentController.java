@@ -29,9 +29,8 @@ public class DepartmentController {
 
     @GetMapping("/addDepartment")
     public String addNewDepartment(Model model) {
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("username", principal.getUsername());
-        model.addAttribute("role", principal.getAuthorities());
+        model.addAttribute("role", userService.actualLoginUserRole());
+        model.addAttribute("username", userService.userData(userService.findUserByUsername()));
         model.addAttribute("department", new DepartmentDto());
         List<Location> locations = locationService.findAll();
         model.addAttribute("locations", locations);

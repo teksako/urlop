@@ -26,10 +26,9 @@ public class UpdateDepartment {
     private final UserService userService;
 
     @GetMapping({"/updateDepartment"})
-    public String departmentUpdatePage(Model model, Department department) {
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("username", principal.getUsername());
-        model.addAttribute("role", principal.getAuthorities());
+    public String departmentUpdatePage(Model model) {
+        model.addAttribute("role", userService.actualLoginUserRole());
+        model.addAttribute("username", userService.userData(userService.findUserByUsername()));
 
         List<User> users = userService.findAll();
         model.addAttribute("users", users);

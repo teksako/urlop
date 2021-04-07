@@ -31,10 +31,26 @@ public class UserService {
     @Autowired
     private final UserAssembler userAssembler;
 
-    public String actualLoginUser() {
 
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return principal.getUsername();
+
+    private UserDetails userDetailsService() {
+        return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    public String actualLoginUser() {
+        return userDetailsService().getUsername();
+    }
+
+    public String actualLoginUserRole() {
+        return userDetailsService().getAuthorities().toString();
+    }
+
+    public User findUserByUsername() {
+        return userRepository.findUserByUsername(actualLoginUser());
+    }
+
+    public String userData(User user) {
+        return user.getFirstname() + " " + user.getLastname();
     }
 
     public Long save(UserDto userDto) {
@@ -46,32 +62,16 @@ public class UserService {
     }
 
     public List<User> findAll() {
-
         return userRepository.findAll();
     }
 
     public List<User> findAllByUserIsFalse() {
-
         return userRepository.findAllByUsernameIsNot(actualLoginUser());
     }
-
-
-//    public List<User> loadUserByUsername(UserDto userDto) {
-//        Optional<User> user1 = userRepository.findById(userDto.getId());
-////        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-////        String username = principal.getUsername();
-//        if (user1.isPresent()) {
-//            User user = user1.get();
-//            user.setFirstname(userDto.getFirstname());
-//        }
-//        return  userRepository.findById(user1);
-//
-//    }
 
     public User changePassword(String password) {
         return userRepository.findUsersByPassword(password);
     }
-
 
     public void deleteUser(UserDto userDto) {
         Optional<User> user = userRepository.findById(userDto.getId());
@@ -86,14 +86,13 @@ public class UserService {
     }
 
     public void resetPasswordByAdmin(UserDto userDto) {
-
         Optional<User> user1 = userRepository.findById(userDto.getId());
         if (user1.isPresent()) {
             User user = user1.get();
-            //user.setId(userDto.getId());
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
             userRepository.save(user);
         }
     }
+
 
 }

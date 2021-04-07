@@ -23,10 +23,16 @@ public class UserManagementController {
 
     private final UserService userService;
     private final DepartmentService departmentService;
-
+//
+//    private Model addModel(Model model){
+//        model.addAttribute("role", userService.actualLoginUserRole());
+//        model.addAttribute("username", userService.userData(userService.findUserByUsername()));
+//    }
 
     @GetMapping({"/deleteUserForm"})
     public String userForm(Model model) {
+        model.addAttribute("role", userService.actualLoginUserRole());
+        model.addAttribute("username", userService.userData(userService.findUserByUsername()));
         model.addAttribute("user", new UserDto());
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
@@ -51,6 +57,8 @@ public class UserManagementController {
 
     @GetMapping({"/updateUserForm"})
     public String updateUserForm(Model model) {
+        model.addAttribute("role", userService.actualLoginUserRole());
+        model.addAttribute("username", userService.userData(userService.findUserByUsername()));
         model.addAttribute("user", new UserDto());
         List<Department> departments = departmentService.findAll();
         model.addAttribute("departments", departments);
@@ -70,6 +78,8 @@ public class UserManagementController {
 
     @GetMapping("/resetpassword")
     public String resetPasswordPage(Model model) {
+        model.addAttribute("role", userService.actualLoginUserRole());
+        model.addAttribute("username", userService.userData(userService.findUserByUsername()));
         model.addAttribute("user", new UserDto());
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
@@ -87,9 +97,8 @@ public class UserManagementController {
 
     @GetMapping("/registration")
     public String registerPage(Model model) {
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("username", principal.getUsername());
-        model.addAttribute("role", principal.getAuthorities());
+        model.addAttribute("role", userService.actualLoginUserRole());
+        model.addAttribute("username", userService.userData(userService.findUserByUsername()));
         model.addAttribute("user", new UserDto());
         List<Department> departments = departmentService.findAll();
         model.addAttribute("departments", departments);

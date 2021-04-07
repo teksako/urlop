@@ -11,17 +11,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.sda.urlopy.model.Location;
 import pl.sda.urlopy.service.LocationService;
+import pl.sda.urlopy.service.UserService;
 
 @Controller
 @RequiredArgsConstructor
 public class LocationController {
     private final LocationService locationService;
+    private final UserService userService;
 
     @GetMapping({"/location"})
     public String locationPage(Model model) {
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("username", principal.getUsername());
-        model.addAttribute("role", principal.getAuthorities());
+        model.addAttribute("role", userService.actualLoginUserRole());
+        model.addAttribute("username", userService.userData(userService.findUserByUsername()));
         model.addAttribute("location", new Location());
         return "location";
     }

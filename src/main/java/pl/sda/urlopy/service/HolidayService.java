@@ -70,4 +70,6 @@ public class HolidayService {
         holiday.get().setAccepted(holidayDto.getAccepted());
         holidayRepository.save(holiday.get());
     }
+
+
 }

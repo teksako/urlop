@@ -25,16 +25,12 @@ public class HolidayController {
 
     @GetMapping({"/holiday"})
     public String holidayPage(Model model) {
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("username", principal.getUsername());
-        model.addAttribute("role", principal.getAuthorities());
+        model.addAttribute("role", userService.actualLoginUserRole());
+        model.addAttribute("username", userService.userData(userService.findUserByUsername()));
         model.addAttribute("holiday", new HolidayDto());
-//      User u = principal.getUser(principal.getUsername());
-//      request.getSession().setAttribute("userId", u.getId);
         List<User> users = userService.findAllByUserIsFalse();
        // List<User> users = userService.findAll();
         model.addAttribute("users", users);
-
 
         return "holiday";
     }
@@ -45,8 +41,7 @@ public class HolidayController {
         if (bindingResult.hasErrors()) {
             return "holiday";
         }
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        holiday.setActualLoggedUser(principal.getUsername());
+        holiday.setActualLoggedUser(userService.actualLoginUser());
         holidayService.save(holiday);
         return "index";
     }
