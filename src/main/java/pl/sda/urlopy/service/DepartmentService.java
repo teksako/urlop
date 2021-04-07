@@ -20,17 +20,19 @@ import java.util.Optional;
 public class DepartmentService {
     private final DepartmentRepository departmentRepository;
     private final DepartmentAssembler departmentAssembler;
-    //private final DepartmentService departmentService;
 
     public Long save(DepartmentDto departmentDto) {
+
         Department department = departmentAssembler.toEntity(departmentDto);
         Department savedDepartment = departmentRepository.save(department);
         return savedDepartment.getId();
     }
 
     public List<Department> findAll() {
+
         return departmentRepository.findAll();
     }
+
 //    public List<Department> findAllById(long id){
 //
 //        return departmentRepository.findAllById(id);}

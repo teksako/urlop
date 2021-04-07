@@ -5,13 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import pl.sda.urlopy.assembler.HolidayAssembler;
 import pl.sda.urlopy.assembler.UserAssembler;
 import pl.sda.urlopy.dto.HolidayDto;
-import pl.sda.urlopy.dto.UserDto;
 import pl.sda.urlopy.model.Holiday;
-import pl.sda.urlopy.model.User;
 import pl.sda.urlopy.repository.HolidayRepository;
 import pl.sda.urlopy.repository.UserRepository;
 
@@ -26,6 +23,8 @@ public class HolidayService {
     private final HolidayAssembler holidayAssembler;
     private final UserRepository userRepository;
     private final UserAssembler userAssembler;
+    private final UserService userService;
+
 
 
     public Long save(HolidayDto holidayDto) {
@@ -35,16 +34,28 @@ public class HolidayService {
     }
 
     public List<Holiday> findAllByAcceptedIsAndActualLoggedUserIs() {
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String user = principal.getUsername();
-        return holidayRepository.findAllByAcceptedIsAndActualLoggedUserIsNot("BRAK DECYZJI", user);
+        return holidayRepository.findAllByAcceptedIsAndActualLoggedUserIsNot("BRAK DECYZJI", userService.actualLoginUser());
+    }
+
+    public Long count(String accept) {
+        return holidayRepository.countHolidayByAcceptedIsAndActualLoggedUserIs(accept, userService.actualLoginUser());
+    }
+
+    public Long countAll(){
+        return holidayRepository.countAllByActualLoggedUserIs(userService.actualLoginUser());
+    }
+
+
+    public  Long allDays(){
+    long zeroDays=0;
+    if(holidayRepository.allDays(userService.actualLoginUser())==null){
+        return zeroDays;
+    }
+        return holidayRepository.allDays(userService.actualLoginUser());
     }
 
     public List<Holiday> findAllByActualLoggedUserIs() {
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        //User user = userAssembler.toEntity(userDto).
-        //model.addAttribute("owner", principal.getUsername());
-        return holidayRepository.findAllByActualLoggedUserIs(principal.getUsername());
+        return holidayRepository.findAllByActualLoggedUserIs(userService.actualLoginUser());
     }
 
 

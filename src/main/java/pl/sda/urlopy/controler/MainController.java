@@ -28,8 +28,6 @@ public class MainController {
         List<User> users = userService.findAll();
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("username", principal.getUsername());
-//        model.addAttribute("firstname",  userDto.getFirstname());
-//        model.addAttribute("lastname", userDto.getLastname());
         model.addAttribute("role", principal.getAuthorities());
         return "index";
     }

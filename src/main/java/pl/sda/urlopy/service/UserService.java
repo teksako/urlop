@@ -26,10 +26,16 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
     private final UserRepository userRepository;
+    @Autowired
     private final UserAssembler userAssembler;
-    //private final RoleRepository roleRepository;
 
+    public String actualLoginUser() {
+
+        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return principal.getUsername();
+    }
 
     public Long save(UserDto userDto) {
         User user = userAssembler.toEntity(userDto);
@@ -40,13 +46,13 @@ public class UserService {
     }
 
     public List<User> findAll() {
+
         return userRepository.findAll();
     }
 
     public List<User> findAllByUserIsFalse() {
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String owner = principal.getUsername();
-        return userRepository.findAllByUsernameIsNot(owner);
+
+        return userRepository.findAllByUsernameIsNot(actualLoginUser());
     }
 
 

@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -34,14 +35,24 @@ public class RaportOfHoliday {
     private final HolidayService holidayService;
     private final UserService userService;
 
+
     @GetMapping({"/raport"})
-    public String raportPage(Model model,UserDto userDto ) {
+    public String raportPage(Model model,HolidayDto userDto ) {
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("username", principal.getUsername());
 //        List<User> users = userService.loadUserByUsername();
 //        model.addAttribute("firstname", users);
+        Long counterAccept = holidayService.count("AKCEPTACJA");
+        model.addAttribute("counterAccept", counterAccept);
+        Long counterReject = holidayService.count("ODRZUCENIE");
+        model.addAttribute("counterReject", counterReject);
+        Long counterNone = holidayService.count("BRAK DECYZJI");
+        model.addAttribute("counterNone", counterNone);
+        Long countAll = holidayService.countAll();
+        model.addAttribute("countAll", countAll);
         List<Holiday> holidays = holidayService.findAllByActualLoggedUserIs();
         model.addAttribute("holidays", holidays);
+        model.addAttribute("allDays", holidayService.allDays());
         return "raportofholiday";
     }
 
@@ -50,7 +61,7 @@ public class RaportOfHoliday {
 
         List<Holiday> holidays = holidayService.findAllByActualLoggedUserIs();
 
-        ByteArrayInputStream bis = ExportPdf.holidaysReport(holidays);
+        ByteArrayInputStream bis = ExportPdf.holidaysReport(holidays, userService, holidayService);
 
         HttpHeaders headers = new HttpHeaders();
 

@@ -1,6 +1,8 @@
 package pl.sda.urlopy.controler;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,12 +23,15 @@ public class AcceptHolidayController {
 
     @GetMapping({"/acceptholiday"})
     public String acceptHolidayPage(Model model) {
+        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("username", principal.getUsername());
+        model.addAttribute("role", principal.getAuthorities());
         model.addAttribute("holiday", new HolidayDto());
 //        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        model.addAttribute("username", principal.getUsername());
 //        model.addAttribute("role", principal.getAuthorities());
        List<Holiday> holidays = holidayService.findAllByAcceptedIsAndActualLoggedUserIs();
-        //List<Holiday> holidays = holidayService.findAll();
+       // List<Holiday> holidays = holidayService.findAll();
         model.addAttribute("holidays", holidays);
         return "acceptholiday";
     }

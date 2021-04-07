@@ -30,6 +30,7 @@ public class UserManagementController {
         model.addAttribute("user", new UserDto());
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
+
         return "deleteUserForm";
     }
 //      INNA METODA

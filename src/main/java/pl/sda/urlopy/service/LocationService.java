@@ -18,11 +18,13 @@ public class LocationService {
 
 
     public void save(Location location) {
+
         locationRepository.save(location);
     }
 
 
     public List<Location> findAll() {
+
         return locationRepository.findAll();
     }
 }
