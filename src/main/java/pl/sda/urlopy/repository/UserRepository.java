@@ -15,6 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findAll();
 
     List<User> findAllByUsernameIsNot(String owner);
+    List<User> findAllByUsernameIsNotAndDepartmentIs(String owner, String department);
 
     User findUsersByPassword(String password);
 

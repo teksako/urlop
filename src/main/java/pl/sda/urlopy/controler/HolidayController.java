@@ -28,7 +28,7 @@ public class HolidayController {
         model.addAttribute("role", userService.actualLoginUserRole());
         model.addAttribute("username", userService.userData(userService.findUserByUsername()));
         model.addAttribute("holiday", new HolidayDto());
-        List<User> users = userService.findAllByUserIsFalse();
+        List<User> users = userService.findAllByUsernameIsNotAndDepartmentIs(userService.findUserByUsername());
        // List<User> users = userService.findAll();
         model.addAttribute("users", users);
 

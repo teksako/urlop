@@ -124,7 +124,7 @@
                         <option value="">Wybierz zastępstwo</option>
                         <option th:each="user : ${users}"
                                 th:value="${user.id}"
-                                th:text="${user.username}"></option>
+                                th:text="${user.firstname +' '+ user.lastname}"></option>
                     </select>
                     </td>
                 </tr>

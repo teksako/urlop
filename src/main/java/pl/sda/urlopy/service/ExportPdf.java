@@ -3,6 +3,7 @@ package pl.sda.urlopy.service;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.draw.DrawInterface;
@@ -15,6 +16,7 @@ import pl.sda.urlopy.model.Holiday;
 import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -42,43 +44,49 @@ public class ExportPdf {
         document = new Document();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
+
+
         try {
-            Font headFont = FontFactory.getFont(FontFactory.TIMES_BOLD, 15);
+            BaseFont helvetica = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
+            Font headFont = FontFactory.getFont(FontFactory.TIMES_BOLD, BaseFont.CP1250, BaseFont.EMBEDDED,15);
+            Font data = FontFactory.getFont(FontFactory.TIMES, BaseFont.CP1250, BaseFont.EMBEDDED,15);
+
+            Font helvetica16=new Font(helvetica,20);
             Paragraph p = new Paragraph();
             Paragraph header = new Paragraph();
             Paragraph tableHeader = new Paragraph();
-            Chunk owner = new Chunk(userService.actualLoginUser());
+            Chunk owner = new Chunk(userService.userData(userService.findUserByUsername()));
             Chunk allApplication = new Chunk(holidayService.countAll().toString());
             Chunk allDays = new Chunk(holidayService.allDays().toString());
             Chunk acceptedAplication = new Chunk(holidayService.count(accepted).toString());
             Chunk rejectAplication = new Chunk(holidayService.count(reject).toString());
             Chunk noDecisionAplication = new Chunk(holidayService.count(noDecision).toString());
 
-
+            p.setFont(data);
             p.setAlignment(Element.ALIGN_BOTTOM);
-            header.setFont(headFont);
+            header.setFont(helvetica16);
             header.setAlignment(Element.ALIGN_CENTER);
 
             tableHeader.setFont(headFont);
             tableHeader.setAlignment(Element.ALIGN_CENTER);
 
-            header.add("Raport urlopowy pracownika: " + owner + " ".replaceAll("\\s+", "\n"));
+            header.add("Raport urlopowy pracownika " + owner + " ".replaceAll("\\s+", "\n"));
             header.add(Chunk.NEWLINE);
             header.add(Chunk.NEWLINE);
             p.add("Raport wygenerowany o godzinie " +timeLabel.getHour()+":"+timeLabel.getMinute()+":"+timeLabel.getSecond()+ " dnia "+ today.toString() + " ".replaceAll("\\s+", "\n"));
-            p.add("Ilosc zlozonych wioskow: " + allApplication + " ".replaceAll("\\s+", "\n"));
-            p.add("Ilosc zaakceptowanych wnioskow: " + acceptedAplication + " ".replaceAll("\\s+", "\n"));
-            p.add("Ilosc odrzuconych wnioskow: " + rejectAplication + " ".replaceAll("\\s+", "\n"));
-            p.add("Ilosc wnioskow oczekujacych: " + noDecisionAplication + " ".replaceAll("\\s+", "\n"));
-            p.add("Ilosc wykorzystanego urlopu: " + allDays + " dni." + " ".replaceAll("\\s+", "\n"));
+            p.add("Ilość złożonych wniosków: " + allApplication + " ".replaceAll("\\s+", "\n"));
+            p.add("Ilość zaakceptowanych wniosków: " + acceptedAplication + " ".replaceAll("\\s+", "\n"));
+            p.add("Ilość odrzuconych wniosków: " + rejectAplication + " ".replaceAll("\\s+", "\n"));
+            p.add("Ilość wniosków oczekujących: " + noDecisionAplication + " ".replaceAll("\\s+", "\n"));
+            p.add("Ilość wykorzystanego urlopu: " + allDays + " dni." + " ".replaceAll("\\s+", "\n"));
             p.add(Chunk.NEWLINE);
             p.add(Chunk.NEWLINE);
-            tableHeader.add("Spis wnioskow");
+            tableHeader.add("Spis wniosków");
             tableHeader.add(Chunk.NEWLINE);
             tableHeader.add(Chunk.NEWLINE);
             PdfPTable table = new PdfPTable(4);
-            table.setWidthPercentage(80);
-            table.setWidths(new int[]{4, 4, 3, 5});
+            table.setWidthPercentage(90);
+            table.setWidths(new int[]{5, 5, 3, 5});
 
 
             PdfPCell hcell;
@@ -136,7 +144,7 @@ public class ExportPdf {
             document.add(table);
             document.close();
 
-        } catch (DocumentException ex) {
+        } catch (DocumentException | IOException ex) {
 
         }
 

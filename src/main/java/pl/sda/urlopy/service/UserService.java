@@ -32,7 +32,6 @@ public class UserService {
     private final UserAssembler userAssembler;
 
 
-
     private UserDetails userDetailsService() {
         return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
@@ -67,6 +66,10 @@ public class UserService {
 
     public List<User> findAllByUserIsFalse() {
         return userRepository.findAllByUsernameIsNot(actualLoginUser());
+    }
+
+    public List<User> findAllByUsernameIsNotAndDepartmentIs(User user){
+        return userRepository.findAllByUsernameIsNotAndDepartmentIs(actualLoginUser(), user.getDepartment());
     }
 
     public User changePassword(String password) {

@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/raport").authenticated()
                 .antMatchers("/exportpdf").authenticated()
                 .antMatchers("/resetpassword").hasAuthority("ADMIN")
-                .antMatchers("/acceptholiday").hasAuthority("ADMIN")
+                .antMatchers("/acceptholiday").hasAnyAuthority("ADMIN", "KIEROWNIK")
                 .antMatchers("/updatetholiday").hasAuthority("ADMIN")
                 .antMatchers("/updatetDepartment").hasAuthority("ADMIN")
                 .antMatchers("/deleteUserForm").hasAuthority("ADMIN")
